@@ -1,0 +1,155 @@
+---
+/**
+ * MOLECULES — Controls. Reuses atoms/tokens only. Interactive demo.
+ * Presentation matches Figma: thin separators; only Tags shows a dark panel.
+ */
+import arrow from '../assets/icons/arrow-right.svg?raw';
+import chevron from '../assets/icons/down-arrow.svg?raw';
+
+const filters = ['View all', 'Category one', 'Category two', 'Category three', 'Category four'];
+const tabs = ['Tabulation 1', 'Tabulation 2', 'Tabulation 3', 'Tabulation 4', 'Tabulation 5', 'Tabulation 6', 'Tabulation 7'];
+const segments = ['Button', 'Button', 'Button', 'Button', 'Button', 'Button'];
+const pages = ['1', '2', '3', '4'];
+---
+<div class="flex flex-col divide-y divide-base-300">
+
+  <!-- Tags (light + dark panel, per Figma) -->
+  <section class="flex flex-col gap-4 py-8 first:pt-0">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Tags</h3>
+    <div class="grid gap-6 lg:grid-cols-2">
+      <!-- Alternate=False (light): outline + link -->
+      <div class="flex flex-wrap items-center gap-4">
+        <span class="vb-tag vb-tag--default">Category</span>
+        <span class="vb-tag vb-tag--default"><span class="vb-tag__dot"></span>Category</span>
+        <a href="#" class="vb-tag vb-tag--link">Category</a>
+        <a href="#" class="vb-tag vb-tag--link"><span class="vb-tag__dot"></span>Category</a>
+      </div>
+      <!-- Alternate=True (dark): filled + link -->
+      <div class="on-dark flex flex-wrap items-center gap-4 rounded-box p-6" style="background: var(--vb-color-scheme-1-bg-inverse);">
+        <span class="vb-tag vb-tag--alt">Category</span>
+        <span class="vb-tag vb-tag--alt"><span class="vb-tag__dot"></span>Category</span>
+        <a href="#" class="vb-tag vb-tag--link">Category</a>
+        <a href="#" class="vb-tag vb-tag--link"><span class="vb-tag__dot"></span>Category</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slider Gallery -->
+  <section class="flex flex-col gap-4 py-8">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Slider Gallery</h3>
+    <div data-nav="sg" class="flex items-center justify-between gap-6">
+      <div class="vb-dots">
+        <input type="radio" name="sg" id="sg1" checked /><label class="vb-dot" for="sg1"></label>
+        <input type="radio" name="sg" id="sg2" /><label class="vb-dot" for="sg2"></label>
+        <input type="radio" name="sg" id="sg3" /><label class="vb-dot" for="sg3"></label>
+      </div>
+      <div class="flex gap-2">
+        <button type="button" class="vb-icon-btn vb-icon-btn--flip" data-dir="prev" aria-label="Previous" set:html={arrow}></button>
+        <button type="button" class="vb-icon-btn" data-dir="next" aria-label="Next" set:html={arrow}></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Faqs -->
+  <section class="flex flex-col gap-4 py-8">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Faqs</h3>
+    <div class="flex gap-4">
+      <label class="vb-faq" aria-label="Toggle"><input type="checkbox" /></label>
+      <label class="vb-faq vb-faq--dark" aria-label="Toggle"><input type="checkbox" /></label>
+    </div>
+  </section>
+
+  <!-- Arrows -->
+  <section class="flex flex-col gap-4 py-8">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Arrows</h3>
+    <div class="flex gap-4">
+      <button type="button" class="vb-icon-btn vb-icon-btn--flip" aria-label="Previous" set:html={arrow}></button>
+      <button type="button" class="vb-icon-btn" aria-label="Next" set:html={arrow}></button>
+      <button type="button" class="vb-icon-btn vb-icon-btn--plain vb-icon-btn--flip" aria-label="Previous" set:html={arrow}></button>
+      <button type="button" class="vb-icon-btn vb-icon-btn--plain" aria-label="Next" set:html={arrow}></button>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <section class="flex flex-col gap-4 py-8">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Filters</h3>
+    <div class="vb-filters">
+      {filters.map((f, i) => (
+        <Fragment>
+          <input type="radio" name="filters" id={`flt-${i}`} checked={i === 0} />
+          <label class="vb-filter" for={`flt-${i}`}>{f}</label>
+        </Fragment>
+      ))}
+    </div>
+  </section>
+
+  <!-- Tabs -->
+  <section class="flex flex-col gap-4 py-8">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Tabs</h3>
+    <div class="vb-tabs">
+      {tabs.map((t, i) => (
+        <Fragment>
+          <input type="radio" name="tabs" id={`tab-${i}`} checked={i === 0} />
+          <label class="vb-tab" for={`tab-${i}`}>{t}</label>
+        </Fragment>
+      ))}
+    </div>
+  </section>
+
+  <!-- Button Group -->
+  <section class="flex flex-col gap-4 py-8">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Button Group</h3>
+    <div class="vb-segmented w-fit">
+      {segments.map((s, i) => (
+        <Fragment>
+          <input type="radio" name="seg" id={`seg-${i}`} checked={i === 0} />
+          <label class="vb-segment" for={`seg-${i}`}>{s}</label>
+        </Fragment>
+      ))}
+    </div>
+  </section>
+
+  <!-- Pager -->
+  <section class="flex flex-col gap-4 py-8 last:pb-0">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Pager</h3>
+    <div data-nav="pg" class="vb-pager">
+      <button type="button" class="vb-pager__btn vb-pager__btn--prev" data-dir="prev">
+        <span class="vb-pager__chev" set:html={chevron}></span><span>Prev</span>
+      </button>
+      <div class="vb-pager__nums">
+        {pages.map((p, i) => (
+          <Fragment>
+            <input type="radio" name="pg" id={`pg-${i}`} checked={i === 0} />
+            <label class="vb-page" for={`pg-${i}`}>{p}</label>
+          </Fragment>
+        ))}
+        <span class="vb-page vb-page--dots">…</span>
+        <input type="radio" name="pg" id="pg-8" />
+        <label class="vb-page" for="pg-8">8</label>
+      </div>
+      <button type="button" class="vb-pager__btn vb-pager__btn--next" data-dir="next">
+        <span>Next</span><span class="vb-pager__chev" set:html={chevron}></span>
+      </button>
+    </div>
+  </section>
+
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-nav]').forEach(function (root) {
+      var name = root.getAttribute('data-nav');
+      root.querySelectorAll('[data-dir]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var radios = Array.prototype.slice.call(document.getElementsByName(name));
+          if (!radios.length) return;
+          var i = radios.findIndex(function (r) { return r.checked; });
+          if (i < 0) i = 0;
+          var step = btn.getAttribute('data-dir') === 'next' ? 1 : -1;
+          var ni = Math.min(radios.length - 1, Math.max(0, i + step));
+          radios[ni].checked = true;
+        });
+      });
+    });
+  })();
+</script>

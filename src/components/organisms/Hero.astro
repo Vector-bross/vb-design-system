@@ -1,0 +1,79 @@
+---
+/**
+ * ORGANISMS — HeroBanner. Atoms + tokens only.
+ * WithImage (light, foreground bg, content | image 5:4) and
+ * WithBackground (dark, bg-tertiary, single column). Content column uses
+ * justify-between (title top / description + buttons bottom).
+ * Full-bleed band 100vw, content capped at 1120px. Mobile switch stacks.
+ */
+const placeholder = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const body = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.uspendisse varius enim in eros elementum tristiquernare, eros dolor interdum nulla, ut commodo diam libero vitae eratem lorem.';
+---
+<div class="flex flex-col gap-8">
+
+  <!-- WithImage (light) — desktop / mobile -->
+  <div class="flex flex-col gap-4" data-tile>
+    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">HeroBanner · With image — desktop / mobile</span>
+      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+    </div>
+    <div class="vb-hero-band">
+      <div class="vb-hero">
+        <div class="vb-hero__content">
+          <div class="vb-hero__top">
+            <p class="vb-hero__title">Hello Theme!</p>
+            <p class="vb-hero__subtitle">Lorem ipsum dolor sit ametconsectetur</p>
+          </div>
+          <div class="vb-hero__desc">
+            <p class="vb-hero__text">{body}</p>
+            <div class="vb-hero__actions">
+              <a href="#" class="vb-btn vb-btn--primary">Button primary</a>
+              <a href="#" class="vb-btn vb-btn--secondary">Button Secondary</a>
+            </div>
+          </div>
+        </div>
+        <div class="vb-hero__media">
+          <div class="vb-image" set:html={placeholder}></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WithBackground (dark) — desktop / mobile -->
+  <div class="flex flex-col gap-4" data-tile>
+    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">HeroBanner · With background — desktop / mobile</span>
+      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+    </div>
+    <div class="vb-hero-band vb-hero-band--dark on-dark">
+      <div class="vb-hero vb-hero--bg">
+        <div class="vb-hero__content">
+          <div class="vb-hero__top">
+            <p class="vb-hero__title">Hello Theme!</p>
+            <p class="vb-hero__subtitle">Lorem ipsum dolor sit ametconsectetur</p>
+          </div>
+          <div class="vb-hero__desc">
+            <p class="vb-hero__text">{body}</p>
+            <div class="vb-hero__actions">
+              <a href="#" class="vb-btn vb-btn--primary">Button primary</a>
+              <a href="#" class="vb-btn vb-btn--secondary">Button Secondary</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var hero = tile.querySelector('.vb-hero');
+      if (!t || !hero || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { hero.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

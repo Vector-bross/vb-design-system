@@ -1,0 +1,79 @@
+---
+/**
+ * ORGANISMS · Page section — FormSection (Apply + Contact layouts). Dark band
+ * (on-dark) with intro left + form card (bg-inverse) right. Reuses field,
+ * upload, checkbox and button atoms. Atoms + tokens only.
+ */
+import upload from '../../assets/icons/upload-document.svg?raw';
+import tick from '../../assets/icons/tick.svg?raw';
+const intro = 'Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis.';
+interface Props { layout?: 'Apply' | 'Contact'; }
+const { layout = 'Apply' } = Astro.props;
+const title = layout === 'Apply' ? 'Apply for this job' : 'Contact us';
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Form section · {layout} — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <div class="vb-sec-band vb-sec-band--dark on-dark" style="background: var(--vb-color-scheme-1-bg-tertiary);">
+    <div class="vb-sec">
+      <div class="vb-formsec" data-sec>
+        <div class="vb-formsec__intro">
+          <p class="vb-formsec__title">{title}</p>
+          <p class="vb-formsec__text">{intro}</p>
+        </div>
+        <form class="vb-form" onsubmit="return false">
+          <div class="vb-form__row">
+            <label class="vb-field"><span class="vb-field__label">Firstname *</span><input class="vb-input" type="text" /></label>
+            <label class="vb-field"><span class="vb-field__label">Lastname *</span><input class="vb-input" type="text" /></label>
+          </div>
+          <div class="vb-form__row">
+            <label class="vb-field"><span class="vb-field__label">Email address *</span><input class="vb-input" type="email" /></label>
+            <label class="vb-field"><span class="vb-field__label">Phone *</span><input class="vb-input" type="tel" /></label>
+          </div>
+          <label class="vb-field"><span class="vb-field__label">Message *</span><textarea class="vb-input" placeholder="Your message"></textarea></label>
+          {layout === 'Apply' && (
+            <label class="vb-field">
+              <span class="vb-field__label">Send us your CV *</span>
+              <label class="vb-upload" data-upload>
+                <input type="file" />
+                <span class="vb-upload__icon" set:html={upload}></span>
+                <span class="vb-upload__cta">Browse or Drop file<br />(PDF, PNG, JPG, max. 10Mb)</span>
+                <span class="vb-upload__name" hidden></span>
+              </label>
+            </label>
+          )}
+          <div class="vb-form__terms">
+            <label class="vb-control"><input type="checkbox" /><span class="vb-check__box" set:html={`<span>${tick}</span>`}></span></label>
+            <span class="vb-formsec__text">I accept the <a href="#" class="vb-link">terms &amp; conditions</a></span>
+          </div>
+          <div><button type="submit" class="vb-btn vb-btn--primary">Send</button></div>
+          <p class="vb-form__note">*verplicht in te vullen</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+    document.querySelectorAll('[data-upload]').forEach(function (wrap) {
+      var input = wrap.querySelector('input[type=file]');
+      if (!input || input.dataset.bound) return;
+      input.dataset.bound = '1';
+      input.addEventListener('change', function () {
+        var name = wrap.querySelector('.vb-upload__name');
+        var cta = wrap.querySelector('.vb-upload__cta');
+        if (input.files && input.files[0] && name && cta) { name.textContent = input.files[0].name; name.hidden = false; cta.hidden = true; }
+      });
+    });
+  })();
+</script>

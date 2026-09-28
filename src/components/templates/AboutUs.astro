@@ -1,0 +1,38 @@
+---
+/**
+ * PAGE TEMPLATE — About us.
+ * Assembled ONLY from existing components (single source: the same component
+ * files as the styleguide are imported here — no markup duplicated). Styleguide
+ * "tile" chrome is hidden via CSS; multi-variant components (Navbar, Header)
+ * are constrained to their first variant with .vb-tpl__slot--single.
+ *
+ * Composition order — Figma 14284-96146.
+ */
+import Navbar from '../organisms/Navbar.astro';
+import Breadcrumb from '../organisms/Breadcrumb.astro';
+import Header from '../organisms/Header.astro';
+import TextContentSection from '../sections/TextContentSection.astro';
+import UspSection from '../sections/UspSection.astro';
+import Quote from '../tiles/Quote.astro';
+import TeamSection from '../sections/TeamSection.astro';
+import StatsSection from '../sections/StatsSection.astro';
+import CtaLarge from '../sections/CtaLarge.astro';
+import Newsletter from '../organisms/Newsletter.astro';
+import Footer from '../organisms/Footer.astro';
+
+interface Props { contained?: boolean; }
+const { contained = false } = Astro.props;
+---
+<div class={`vb-tpl${contained ? ' vb-tpl--contained' : ''}`} data-tpl>
+  <div class="vb-tpl__slot vb-tpl__slot--single"><Navbar /></div>
+  <div class="vb-tpl__slot"><Breadcrumb /></div>
+  <div class="vb-tpl__slot vb-tpl__slot--single"><Header /></div>
+  <div class="vb-tpl__slot"><TextContentSection /></div>
+  <div class="vb-tpl__slot"><UspSection /></div>
+  <div class="vb-tpl__slot"><Quote /></div>
+  <div class="vb-tpl__slot vb-tpl__slot--bg-white"><TeamSection /></div>
+  <div class="vb-tpl__slot"><StatsSection /></div>
+  <div class="vb-tpl__slot"><CtaLarge /></div>
+  <div class="vb-tpl__slot"><Newsletter /></div>
+  <div class="vb-tpl__slot"><Footer /></div>
+</div>

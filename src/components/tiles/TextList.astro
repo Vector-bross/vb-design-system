@@ -1,0 +1,39 @@
+---
+/**
+ * MOLECULES — Tiles / TextList. Bulleted list, tokens only. Max 928px.
+ * Blue bullet (Inter Medium 20 #004cff) + text (Inter Light 16 #444);
+ * rows separated by a subtle divider; bullets align to the first line.
+ */
+const items = [
+  'Suscipit tristique risus, at donec. In turpis vel etlutpat.',
+  'Que odio senectus nam posuere ornare leo metus, ultricies. Blandit duis ultriciess lorem sed',
+  'Posuere ornare leo metus, ultricies. Blandit duis ultricies vulputate mo',
+];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">TextList — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <ul class="vb-textlist">
+    {items.map((it) => (
+      <li class="vb-textlist__item">
+        <span class="vb-textlist__bullet">&bull;</span>
+        <span class="vb-textlist__text">{it}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      if (!t || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () {
+        tile.querySelectorAll('.vb-media, .vb-intro, .vb-textlist').forEach(function (el) { el.classList.toggle('is-mobile', t.checked); });
+      });
+    });
+  })();
+</script>

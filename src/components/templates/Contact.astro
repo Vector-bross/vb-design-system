@@ -1,0 +1,24 @@
+---
+/**
+ * PAGE TEMPLATE — Contact.
+ * Assembled ONLY from existing components (single source). Composition — Figma 14270-74400.
+ * Header uses the "Contact us" variant (7th tile); FormSection uses the Contact layout.
+ */
+import Navbar from '../organisms/Navbar.astro';
+import Breadcrumb from '../organisms/Breadcrumb.astro';
+import Header from '../organisms/Header.astro';
+import FormSection from '../sections/FormSection.astro';
+import Newsletter from '../organisms/Newsletter.astro';
+import Footer from '../organisms/Footer.astro';
+
+interface Props { contained?: boolean; }
+const { contained = false } = Astro.props;
+---
+<div class={`vb-tpl${contained ? ' vb-tpl--contained' : ''}`} data-tpl>
+  <div class="vb-tpl__slot vb-tpl__slot--single"><Navbar /></div>
+  <div class="vb-tpl__slot"><Breadcrumb /></div>
+  <div class="vb-tpl__slot vb-tpl__slot--pick-7"><Header /></div>
+  <div class="vb-tpl__slot"><FormSection layout="Contact" /></div>
+  <div class="vb-tpl__slot"><Newsletter /></div>
+  <div class="vb-tpl__slot"><Footer /></div>
+</div>

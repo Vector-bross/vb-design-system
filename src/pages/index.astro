@@ -1,0 +1,187 @@
+---
+import PortalShell from '../layouts/PortalShell.astro';
+import { categories, byCategory, registry } from '../registry';
+import { catalog, cleanSource } from '../lib/catalog';
+import { templates, templateCategories, templateModules, singleTemplates, moduleTemplates } from '../lib/templates';
+import type { TemplateEntry } from '../lib/templates';
+const total = registry.length;
+const catLabel = (id: string) => categories.find((c) => c.id === id)?.label ?? id;
+const sources: Record<string, string> = {};
+for (const e of registry) sources[e.id] = cleanSource(catalog[e.id]?.src ?? '');
+const sourcesJson = JSON.stringify(sources).replace(/</g, '\\u003c');
+---
+<PortalShell title="Kickstart Theme — Component library" active="home">
+  <div class="vb-lib__head vb-lib__head--row">
+    <h1 class="vb-lib__title">Website sections</h1>
+    <div class="vb-lib__search">
+      <svg class="vb-lib__searchicn" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" id="vb-lib-search" placeholder="Search…" autocomplete="off" />
+    </div>
+  </div>
+
+  <div class="vb-lib__toolbar">
+    <div class="vb-lib__toolrow">
+      <div class="vb-lib__filters" id="vb-lib-filters">
+        <button class="vb-lib__chip is-active" data-cat="all">All</button>
+        {categories.map((c) => (
+          <button class="vb-lib__chip" data-cat={c.id}>{c.label}</button>
+        ))}
+      </div>
+      <span class="vb-lib__count" id="vb-lib-count">{total} components</span>
+    </div>
+  </div>
+
+  {templates.length > 0 && (() => {
+    const tplCard = (t: TemplateEntry) => (
+      <article class="vb-libcard" data-tpl-card data-name={t.name.toLowerCase()}>
+        <div class="vb-libcard__thumb">
+          <a class="vb-libcard__thumblink" href={`t/${t.id}.html`} aria-label={`Open ${t.name}`}></a>
+          <iframe class="vb-libcard__iframe" src={`templates/${t.id}.html`} scrolling="no" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
+        </div>
+        <div class="vb-libcard__body">
+          <span class="vb-libcard__cat">{t.module ? templateModules.find((m) => m.id === t.module)?.label : 'Pages'}</span>
+          <a class="vb-libcard__name" href={`t/${t.id}.html`}>{t.name}</a>
+        </div>
+        <div class="vb-libcard__actions">
+          <a class="vb-libcard__copy" href={`t/${t.id}.html`}>View template</a>
+        </div>
+      </article>
+    );
+    return (
+    <section class="vb-lib__cat" id="cat-templates">
+      <h2 class="vb-lib__cat-title">{templateCategories[0].label}</h2>
+      <p class="vb-lib__cat-desc">{templateCategories[0].description}</p>
+      <h3 class="vb-lib__subcat">Single pages</h3>
+      <div class="vb-lib__grid">{singleTemplates().map(tplCard)}</div>
+      {templateModules.map((m) => (
+        <>
+          <h3 class="vb-lib__subcat">{m.label} module</h3>
+          <div class="vb-lib__grid">{moduleTemplates(m.id).map(tplCard)}</div>
+        </>
+      ))}
+    </section>
+    );
+  })()}
+
+  {categories.map((cat) => {
+    const items = byCategory(cat.id);
+    if (items.length === 0) return null;
+    return (
+      <section class="vb-lib__cat" id={`cat-${cat.id}`} data-cat-section={cat.id}>
+        <h2 class="vb-lib__cat-title">{cat.label}</h2>
+        <p class="vb-lib__cat-desc">{cat.description}</p>
+        <div class="vb-lib__grid">
+          {items.map((e) => {
+            const Comp = catalog[e.id]?.Component;
+            return (
+            <article class="vb-libcard"
+               data-card data-name={e.name.toLowerCase()} data-tags={(e.tags || []).join(' ').toLowerCase()} data-cat={cat.id}>
+              <div class="vb-libcard__thumb">
+                <a class="vb-libcard__thumblink" href={`c/${e.id}.html`} aria-label={`Open ${e.name}`}></a>
+                <div class="vb-libcard__frame">{Comp && <Comp />}</div>
+              </div>
+              <div class="vb-libcard__body">
+                <span class="vb-libcard__cat">{catLabel(cat.id)}</span>
+                <a class="vb-libcard__name" href={`c/${e.id}.html`}>{e.name}</a>
+              </div>
+              <div class="vb-libcard__actions">
+                <a class="vb-libcard__copy" href={`c/${e.id}.html`}>View component</a>
+                <button class="vb-libcard__icon" data-copy={e.id} aria-label="Copy code" title="Copy code">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                </button>
+              </div>
+            </article>
+            );
+          })}
+        </div>
+      </section>
+    );
+  })}
+
+  <p class="vb-lib__empty" id="vb-lib-empty">No component matches your search.</p>
+
+  <script type="application/json" id="vb-src" set:html={sourcesJson}></script>
+  <script is:inline>
+    (function () {
+      var filters = document.getElementById('vb-lib-filters');
+      var count = document.getElementById('vb-lib-count');
+      var empty = document.getElementById('vb-lib-empty');
+      var cards = Array.prototype.slice.call(document.querySelectorAll('[data-card]'));
+      var sections = Array.prototype.slice.call(document.querySelectorAll('[data-cat-section]'));
+      var tplSection = document.getElementById('cat-templates');
+      var searchEl = document.getElementById('vb-lib-search');
+      var tplCards = Array.prototype.slice.call(document.querySelectorAll('[data-tpl-card]'));
+      var activeCat = 'all';
+      var norm = function (s) { return (s || '').toLowerCase(); };
+
+      // Scale template thumbnails (full desktop render) to fit the card width.
+      function fitThumbs() {
+        document.querySelectorAll('.vb-libcard__iframe, .vb-libcard__frame').forEach(function (f) {
+          var thumb = f.closest('.vb-libcard__thumb');
+          if (thumb && thumb.clientWidth) f.style.transform = 'scale(' + (thumb.clientWidth / 1440) + ')';
+        });
+      }
+      fitThumbs();
+      window.addEventListener('load', fitThumbs);
+      window.addEventListener('resize', fitThumbs);
+
+      function apply() {
+        var q = norm(searchEl && searchEl.value).trim();
+        var visible = 0;
+        cards.forEach(function (card) {
+          var catOk = activeCat === 'all' || card.getAttribute('data-cat') === activeCat;
+          var qOk = !q || norm(card.getAttribute('data-name')).indexOf(q) !== -1 || norm(card.getAttribute('data-tags')).indexOf(q) !== -1;
+          var show = catOk && qOk;
+          card.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        sections.forEach(function (sec) {
+          var any = sec.querySelectorAll('[data-card]:not([style*="display: none"])').length;
+          sec.style.display = any ? '' : 'none';
+        });
+        // Templates: filter by query; whole section only shown on "All".
+        var tplVisible = 0;
+        tplCards.forEach(function (card) {
+          var qOk = !q || norm(card.getAttribute('data-name')).indexOf(q) !== -1;
+          card.style.display = qOk ? '' : 'none';
+          if (qOk) tplVisible++;
+        });
+        if (tplSection) {
+          tplSection.style.display = (activeCat === 'all' && tplVisible) ? '' : 'none';
+          // hide sub-headings whose grid has no visible card
+          tplSection.querySelectorAll('.vb-lib__grid').forEach(function (grid) {
+            var any = grid.querySelectorAll('[data-tpl-card]:not([style*="display: none"])').length;
+            grid.style.display = any ? '' : 'none';
+            var head = grid.previousElementSibling;
+            if (head && head.classList.contains('vb-lib__subcat')) head.style.display = any ? '' : 'none';
+          });
+        }
+        count.textContent = visible + (visible === 1 ? ' component' : ' components');
+        empty.style.display = (visible || (activeCat === 'all' && tplVisible)) ? 'none' : 'block';
+      }
+
+      filters.addEventListener('click', function (e) {
+        var btn = e.target.closest('.vb-lib__chip');
+        if (!btn) return;
+        activeCat = btn.getAttribute('data-cat');
+        filters.querySelectorAll('.vb-lib__chip').forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+        apply();
+      });
+      if (searchEl) searchEl.addEventListener('input', apply);
+
+      // Copy code from the embedded sources map.
+      var sources = {};
+      try { sources = JSON.parse(document.getElementById('vb-src').textContent || '{}'); } catch (e) {}
+      document.querySelectorAll('[data-copy]').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.preventDefault();
+          var code = sources[btn.getAttribute('data-copy')] || '';
+          navigator.clipboard.writeText(code).then(function () {
+            btn.classList.add('is-done');
+            setTimeout(function () { btn.classList.remove('is-done'); }, 1200);
+          });
+        });
+      });
+    })();
+  </script>
+</PortalShell>

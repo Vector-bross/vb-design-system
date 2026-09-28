@@ -1,0 +1,44 @@
+---
+import PortalShell from '../layouts/PortalShell.astro';
+import FaqSection from '../components/sections/FaqSection.astro';
+import StatsSection from '../components/sections/StatsSection.astro';
+import BrandsSection from '../components/sections/BrandsSection.astro';
+import FormSection from '../components/sections/FormSection.astro';
+import Modal from '../components/organisms/Modal.astro';
+---
+<PortalShell title="Page sections 2 — Kickstart Theme" active="sections2">
+
+  <div class="vb-lib__head">
+    <h1 class="vb-lib__title">Page sections 2</h1>
+  </div>
+
+  <div class="flex flex-col gap-12">
+    
+
+    <section id="faq" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">FAQ section</h2>
+      <FaqSection />
+    </section>
+
+    <section id="stats" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Stats section</h2>
+      <StatsSection />
+    </section>
+
+    <section id="brands" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Brands section</h2>
+      <BrandsSection />
+    </section>
+
+    <section id="form" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Form section</h2>
+      <FormSection layout="Apply" />
+      <FormSection layout="Contact" />
+    </section>
+
+    <section id="modal" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Modal</h2>
+      <Modal />
+    </section>
+  </div>
+</PortalShell>

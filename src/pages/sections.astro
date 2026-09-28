@@ -1,0 +1,72 @@
+---
+import PortalShell from '../layouts/PortalShell.astro';
+import NewsSection from '../components/sections/NewsSection.astro';
+import TeamSection from '../components/sections/TeamSection.astro';
+import UspSection from '../components/sections/UspSection.astro';
+import ServicesSection from '../components/sections/ServicesSection.astro';
+import JobsSection from '../components/sections/JobsSection.astro';
+import LocationsSection from '../components/sections/LocationsSection.astro';
+---
+<PortalShell title="Page sections 1 — Kickstart Theme" active="sections">
+
+  <div class="vb-lib__head">
+    <h1 class="vb-lib__title">Page sections 1</h1>
+  </div>
+
+  <div class="flex flex-col gap-12">
+    
+
+    <section id="news" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">News section</h2>
+      <NewsSection />
+    </section>
+
+    <section id="team" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Team section</h2>
+      <TeamSection />
+    </section>
+
+    <section id="usp" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Why us? section</h2>
+      <UspSection />
+    </section>
+
+    <section id="services" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Services section</h2>
+      <ServicesSection />
+    </section>
+
+    <section id="jobs" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Jobs section</h2>
+      <JobsSection />
+    </section>
+
+    <section id="locations" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Locations section</h2>
+      <LocationsSection />
+    </section>
+  </div>
+
+  <script is:inline>
+    (function () {
+      document.querySelectorAll('.vb-sec__grid--slider').forEach(function (el) {
+        var down = false, moved = false, startX = 0, startLeft = 0;
+        el.addEventListener('pointerdown', function (e) {
+          if (el.scrollWidth <= el.clientWidth) return; // only when scrollable (mobile)
+          down = true; moved = false; startX = e.clientX; startLeft = el.scrollLeft;
+          el.setPointerCapture(e.pointerId);
+        });
+        el.addEventListener('pointermove', function (e) {
+          if (!down) return;
+          var dx = e.clientX - startX;
+          if (!moved && Math.abs(dx) > 4) { moved = true; el.classList.add('is-dragging'); }
+          if (moved) el.scrollLeft = startLeft - dx;
+        });
+        function end() { if (!down) return; down = false; setTimeout(function () { el.classList.remove('is-dragging'); }, 0); }
+        el.addEventListener('pointerup', end);
+        el.addEventListener('pointercancel', end);
+        el.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+      });
+    })();
+  </script>
+</PortalShell>

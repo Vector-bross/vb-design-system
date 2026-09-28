@@ -1,0 +1,146 @@
+---
+/**
+ * Typography (ATOMS — Typography). Faithful to the Figma "ATOMS — Typography"
+ * board (node 4179:8581): Typeface, responsive Headings (Desktop + Mobile),
+ * the text size × weight matrix, and utility styles (Caps, Menu, Button, Link).
+ * Every value is bound to --vb-* tokens (source of truth).
+ */
+
+// Headings: [label, desktopToken, mobileToken, letterSpacingToken]
+const headings: [string, string, string, string][] = [
+  ['Heading 1 Home', '--vb-font-size-display-1', '--vb-font-size-display-1-mobile', '--vb-letter-spacing-tighter'],
+  ['Heading 2 Home', '--vb-font-size-display-2', '--vb-font-size-display-2-mobile', '--vb-letter-spacing-tighter'],
+  ['Heading 1', '--vb-font-size-h1', '--vb-font-size-h1-mobile', '--vb-letter-spacing-tighter'],
+  ['Heading 2', '--vb-font-size-h2', '--vb-font-size-h2-mobile', '--vb-letter-spacing-tighter'],
+  ['Heading 3', '--vb-font-size-h3', '--vb-font-size-h3-mobile', '--vb-letter-spacing-tighter'],
+  ['Heading 4', '--vb-font-size-h4', '--vb-font-size-h4-mobile', '--vb-letter-spacing-tighter'],
+  ['Heading 5', '--vb-font-size-h5', '--vb-font-size-h5-mobile', '--vb-letter-spacing-tight'],
+  ['Heading 6', '--vb-font-size-h6', '--vb-font-size-h6-mobile', '--vb-letter-spacing-tight'],
+];
+
+// Text sizes: [label, sizeToken]
+const textSizes: [string, string][] = [
+  ['Text Large', '--vb-font-size-lg'],
+  ['Text Medium', '--vb-font-size-md'],
+  ['Text Regular', '--vb-font-size-base'],
+  ['Text Small', '--vb-font-size-sm'],
+  ['Text Tiny', '--vb-font-size-xs'],
+];
+
+// Weights (Figma order): [label, weightToken]
+const weights: [string, string][] = [
+  ['Extra Bold', '--vb-font-weight-extra-bold'],
+  ['Bold', '--vb-font-weight-bold'],
+  ['Semi Bold', '--vb-font-weight-semibold'],
+  ['Medium', '--vb-font-weight-medium'],
+  ['Normal', '--vb-font-weight-normal'],
+  ['Light', '--vb-font-weight-light'],
+];
+
+const links: [string, string][] = [
+  ['Link large', '--vb-font-size-lg'],
+  ['Link medium', '--vb-font-size-md'],
+  ['Link base', '--vb-font-size-base'],
+  ['Link small', '--vb-font-size-sm'],
+  ['Link xs', '--vb-font-size-xs'],
+];
+
+const h = (fam: string) => `var(${fam})`;
+---
+<div class="flex flex-col gap-14">
+
+  <!-- ============ Typeface ============ -->
+  <section class="flex flex-col gap-4">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Typeface</h3>
+    <div class="grid gap-6 sm:grid-cols-2">
+      <div class="rounded-box border border-base-300 bg-base-100 p-6">
+        <div class="mb-2 font-mono text-[11px] uppercase tracking-wide text-base-content/50">Heading Typeface</div>
+        <div style="font-family:var(--vb-font-family-heading);font-weight:var(--vb-font-weight-semibold);font-size:56px;line-height:1.1;letter-spacing:var(--vb-letter-spacing-tighter);">Poppins</div>
+        <div class="mt-3 font-mono text-xs text-base-content/50">Aa Bb Cc · 0123456789</div>
+      </div>
+      <div class="rounded-box border border-base-300 bg-base-100 p-6">
+        <div class="mb-2 font-mono text-[11px] uppercase tracking-wide text-base-content/50">Body Typeface</div>
+        <div style="font-family:var(--vb-font-family-body);font-weight:var(--vb-font-weight-semibold);font-size:56px;line-height:1.1;letter-spacing:var(--vb-letter-spacing-tight);">Inter</div>
+        <div class="mt-3 font-mono text-xs text-base-content/50">Aa Bb Cc · 0123456789</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Headings — Desktop + Mobile ============ -->
+  <section class="flex flex-col gap-5">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Headings</h3>
+    <div class="grid grid-cols-[auto_1fr] gap-x-8 border-b border-base-300 pb-2 sm:grid-cols-[auto_1fr_1fr]">
+      <span class="text-xs font-medium uppercase tracking-wide text-base-content/40">Level</span>
+      <span class="font-mono text-[11px] uppercase tracking-wide text-base-content/50">Desktop</span>
+      <span class="hidden font-mono text-[11px] uppercase tracking-wide text-base-content/50 sm:block">Mobile</span>
+    </div>
+    {headings.map(([label, dTok, mTok, lsTok]) => (
+      <div class="grid grid-cols-[auto_1fr] items-baseline gap-x-8 gap-y-2 border-b border-base-300/60 py-4 sm:grid-cols-[auto_1fr_1fr]">
+        <div class="flex w-28 flex-col">
+          <span class="text-sm font-medium">{label}</span>
+          <span class="font-mono text-[11px] text-base-content/50">SemiBold</span>
+        </div>
+        <div class="flex flex-col gap-1">
+          <div style={`font-family:var(--vb-font-family-heading);font-weight:var(--vb-font-weight-semibold);font-size:var(${dTok});line-height:var(--vb-line-height-110);letter-spacing:var(${lsTok});`}>{label}</div>
+          <span class="font-mono text-[11px] text-base-content/40">var({dTok})</span>
+        </div>
+        <div class="hidden flex-col gap-1 sm:flex">
+          <div style={`font-family:var(--vb-font-family-heading);font-weight:var(--vb-font-weight-semibold);font-size:var(${mTok});line-height:var(--vb-line-height-110);letter-spacing:var(${lsTok});`}>{label}</div>
+          <span class="font-mono text-[11px] text-base-content/40">var({mTok})</span>
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <!-- ============ Text — size × weight matrix ============ -->
+  <section class="flex flex-col gap-5">
+    <div class="flex items-baseline justify-between border-b border-base-300 pb-2">
+      <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Text</h3>
+      <span class="font-mono text-[11px] text-base-content/50">Inter · line-height 130</span>
+    </div>
+    <div class="flex flex-col gap-8">
+      {textSizes.map(([sizeLabel, sizeTok]) => (
+        <div class="flex flex-col gap-3">
+          <div class="flex items-baseline gap-3">
+            <span class="text-sm font-medium">{sizeLabel}</span>
+            <span class="font-mono text-[11px] text-base-content/50">var({sizeTok})</span>
+          </div>
+          <div class="flex flex-wrap gap-x-8 gap-y-2">
+            {weights.map(([wLabel, wTok]) => (
+              <div class="flex flex-col">
+                <span style={`font-family:var(--vb-font-family-body);font-size:var(${sizeTok});font-weight:var(${wTok});line-height:var(--vb-line-height-130);`}>{wLabel}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ============ Utility — Caps / Menu / Button / Link ============ -->
+  <section class="flex flex-col gap-5">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Utility</h3>
+    <div class="grid items-start gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="flex flex-col gap-2 rounded-box border border-base-300 bg-base-100 p-5">
+        <span class="font-mono text-[11px] uppercase tracking-wide text-base-content/50">Caps</span>
+        <span style="font-family:var(--vb-font-family-caps);font-size:var(--vb-font-size-caps);font-weight:var(--vb-font-weight-semibold);line-height:var(--vb-line-height-115);letter-spacing:var(--vb-letter-spacing-wide);text-transform:uppercase;">Section label</span>
+      </div>
+      <div class="flex flex-col gap-2 rounded-box border border-base-300 bg-base-100 p-5">
+        <span class="font-mono text-[11px] uppercase tracking-wide text-base-content/50">Menu</span>
+        <span style="font-family:var(--vb-menu-font-family);font-size:var(--vb-menu-font-size);font-weight:var(--vb-font-weight-medium);line-height:var(--vb-menu-line-height);letter-spacing:var(--vb-menu-letter-spacing);text-transform:uppercase;">Menu item</span>
+      </div>
+      <div class="flex flex-col gap-3 rounded-box border border-base-300 bg-base-100 p-5">
+        <span class="font-mono text-[11px] uppercase tracking-wide text-base-content/50">Button</span>
+        <span style="font-family:var(--vb-font-family-buttons);font-size:var(--vb-font-size-base);font-weight:var(--vb-font-weight-semibold);line-height:var(--vb-line-height-115);letter-spacing:var(--vb-button-letter-spacing);">Button large</span>
+        <span style="font-family:var(--vb-font-family-buttons);font-size:var(--vb-font-size-sm);font-weight:var(--vb-font-weight-semibold);line-height:var(--vb-line-height-115);letter-spacing:var(--vb-button-letter-spacing);">Button small</span>
+      </div>
+      <div class="flex flex-col gap-2 rounded-box border border-base-300 bg-base-100 p-5">
+        <span class="font-mono text-[11px] uppercase tracking-wide text-base-content/50">Link</span>
+        {links.map(([lLabel, lTok]) => (
+          <a href="#" class="vb-link w-fit" style={`font-size:var(${lTok});`}>{lLabel}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,47 @@
+---
+/**
+ * MOLECULES — Tiles / Table. Tokens only. Black header (Inter SemiBold 16 white),
+ * white cells (Inter Regular 16 #444), #ccc borders, Results column right-aligned.
+ */
+const rows = [
+  ['Idleo in vitae turpis massa', 'Idleo in vitae turpis massa', '00'],
+  ['Massa sed elementum tempus egest', 'Massa sed elementum tempus egest', '00'],
+  ['Idleo in vitae turpis massa', 'Idleo in vitae turpis massa', '00'],
+  ['Massa sed elementum tempus egest', 'Massa sed elementum tempus egest', '00'],
+];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Table — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <div class="vb-table-wrap">
+    <table class="vb-table">
+      <thead>
+        <tr>
+          <th>Donec pretium vulputate sa</th>
+          <th>Donec pretium vulputate sa</th>
+          <th>Results</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      if (!t || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () {
+        tile.querySelectorAll('.vb-media, .vb-intro, .vb-textlist, .vb-gallery, .vb-numlist, .vb-table-wrap').forEach(function (el) { el.classList.toggle('is-mobile', t.checked); });
+      });
+    });
+  })();
+</script>

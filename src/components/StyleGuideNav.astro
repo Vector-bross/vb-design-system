@@ -1,0 +1,83 @@
+---
+/**
+ * Style guide navigation (sticky, shared across pages).
+ * Top level = Atomic Design layers → separate pages.
+ * Sub-nav = sections of the current page. Includes a back-to-top button.
+ */
+import logoVb from '../assets/brand/logo-vb.svg?raw';
+import chevron from '../assets/icons/down-arrow.svg?raw';
+
+interface Props { current?: 'atoms' | 'molecules' | 'organisms' | 'sections' | 'sections2'; }
+const { current = 'atoms' } = Astro.props;
+
+const layers = [
+  {
+    key: 'atoms', label: 'Atoms', href: 'atoms.html', enabled: true,
+    sections: [
+      { label: 'Typography', href: '#typography' },
+      { label: 'Colors', href: '#colors' },
+      { label: 'Buttons', href: '#buttons' },
+      { label: 'Logo & Icons', href: '#logo-icons' },
+      { label: 'Radius, Shadows & AR, Sep, Tooltip', href: '#radius' },
+    ],
+  },
+  {
+    key: 'molecules', label: 'Molecules', href: 'molecules.html', enabled: true,
+    sections: [
+      { label: 'Controls', href: '#controls' },
+      { label: 'Fields', href: '#fields' },
+      { label: 'Forms controls', href: '#forms' },
+      { label: 'Tiles', href: '#tiles' },
+      { label: 'Cards & CTA', href: '#cards' },
+      { label: 'Empty state', href: '#empty' },
+    ],
+  },
+  {
+    key: 'organisms', label: 'Organisms', href: 'organisms.html', enabled: true,
+    sections: [
+      { label: 'Navigation', href: 'organisms.html#navigation' },
+      { label: 'Breadcrumb', href: 'organisms.html#breadcrumb' },
+      { label: 'Hero banner', href: 'organisms.html#hero' },
+      { label: 'Header', href: 'organisms.html#header' },
+      { label: 'Newsletter', href: 'organisms.html#newsletter' },
+      { label: 'Footer', href: 'organisms.html#footer' },
+      { label: 'Page sections 1', href: 'sections.html' },
+      { label: 'Page sections 2', href: 'sections2.html' },
+    ],
+  },
+];
+const currentLayer = layers.find((l) => l.key === current) ?? layers[0];
+---
+<header class="sticky top-0 z-50 border-b border-base-300 bg-base-100/90 backdrop-blur">
+  <div class="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-3">
+    <a href="index.html" class="flex items-center gap-3">
+      <span class="vb-logo block h-7 w-auto" set:html={logoVb}></span>
+      <span class="font-heading text-base font-medium tracking-tight text-base-content/70">Kickstart Theme</span>
+    </a>
+    <nav class="flex items-center gap-6">
+      {layers.map((l) => (
+        l.enabled
+          ? <a class={`vb-layer${l.key === current ? ' is-active' : ''}`} href={l.href}>{l.label}</a>
+          : <span class="vb-layer" aria-disabled="true">{l.label}</span>
+      ))}
+    </nav>
+  </div>
+  <div class="border-t border-base-300/70">
+    <div class="mx-auto flex max-w-[1280px] flex-wrap items-center gap-x-6 gap-y-1 px-6 py-2">
+      {currentLayer.sections.map((s) => (
+        <a href={s.href} class="text-xs font-medium uppercase tracking-wide text-base-content/70 transition-colors hover:text-primary">{s.label}</a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<a href="#top" id="vb-to-top" class="vb-to-top" aria-label="Back to top" set:html={chevron}></a>
+
+<script is:inline>
+  (function () {
+    var btt = document.getElementById('vb-to-top');
+    if (!btt) return;
+    function onScroll() { if (window.scrollY > 400) btt.classList.add('is-visible'); else btt.classList.remove('is-visible'); }
+    window.addEventListener('scroll', onScroll); onScroll();
+  })();
+</script>

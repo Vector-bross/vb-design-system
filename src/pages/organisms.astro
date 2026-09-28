@@ -1,0 +1,49 @@
+---
+import PortalShell from '../layouts/PortalShell.astro';
+import Navbar from '../components/organisms/Navbar.astro';
+import Breadcrumb from '../components/organisms/Breadcrumb.astro';
+import Hero from '../components/organisms/Hero.astro';
+import Header from '../components/organisms/Header.astro';
+import Newsletter from '../components/organisms/Newsletter.astro';
+import Footer from '../components/organisms/Footer.astro';
+---
+<PortalShell title="Organisms — Kickstart Theme" active="organisms">
+
+  <div class="vb-lib__head">
+    <h1 class="vb-lib__title">Organisms</h1>
+  </div>
+
+  <div class="flex flex-col gap-12">
+    
+
+    <section id="navigation" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Navigation</h2>
+      <Navbar />
+    </section>
+
+    <section id="breadcrumb" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Breadcrumb</h2>
+      <Breadcrumb />
+    </section>
+
+    <section id="hero" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Hero banner</h2>
+      <Hero />
+    </section>
+
+    <section id="header" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Header</h2>
+      <Header />
+    </section>
+
+    <section id="newsletter" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Newsletter</h2>
+      <Newsletter />
+    </section>
+
+    <section id="footer" class="scroll-mt-28 flex flex-col gap-6">
+      <h2 class="text-3xl font-semibold tracking-tight">Footer</h2>
+      <Footer />
+    </section>
+  </div>
+</PortalShell>

@@ -1,0 +1,243 @@
+/* ==========================================================================
+   VB Design System — Design Tokens (SOURCE OF TRUTH)
+   From Figma "vb-kickstarter-design-v02". Built up step by step (atom by atom).
+   STEP 1 — Colors.  STEP 2 — Typography.
+   ========================================================================== */
+
+:root {
+  /* ---- Neutrals ---- */
+  --vb-color-white: #ffffff;
+  --vb-color-neutral-lightest: #eeeeee;
+  --vb-color-neutral-lighter: #cccccc;
+  --vb-color-neutral-light: #aaaaaa;
+  --vb-color-neutral: #666666;
+  --vb-color-neutral-dark: #444444;
+  --vb-color-neutral-mid: #666666;
+  --vb-color-neutral-darker: #222222;
+  --vb-color-neutral-darkest: #000000;
+
+  /* ---- Brand · Primary ---- */
+  --vb-brand-primary-200: #d8e4ff;
+  --vb-brand-primary-300: #b3caff;
+  --vb-brand-primary-400: #7fa5ff;
+  --vb-brand-primary-500: #004cff;
+  --vb-brand-primary-600: #15388a;
+  --vb-brand-primary-700: #081d4c;
+
+  /* ---- Brand · Secondary ---- */
+  --vb-brand-secondary-200: #e8e4fa;
+  --vb-brand-secondary-300: #bdb4e3;
+  --vb-brand-secondary-400: #9c8be8;
+  --vb-brand-secondary-500: #7055e6;
+  --vb-brand-secondary-600: #1d154e;
+  --vb-brand-secondary-700: #110c2d;
+
+  /* ---- Brand · Tertiary ---- */
+  --vb-brand-tertiary-200: #ffd7fc;
+  --vb-brand-tertiary-300: #ffbbf9;
+  --vb-brand-tertiary-400: #ff8bf5;
+  --vb-brand-tertiary-500: #fb58ed;
+  --vb-brand-tertiary-600: #cd15be;
+
+  /* ---- State (Figma primitives: Color/danger · success · focus) ---- */
+  --vb-color-success: #04b56c;
+  --vb-color-danger: #dc3529;
+  --vb-color-focus: #4277f4;
+  --vb-color-warning: #e8a13b; /* PROVISIONAL — not in Figma; kept only for DaisyUI's warning slot */
+
+  /* ---- Semantic · Color Scheme 1 (aliases to primitives, mirrors Figma) ---- */
+  --vb-color-scheme-1-foreground: var(--vb-color-white);
+  --vb-color-scheme-1-emphasis-color: var(--vb-color-neutral-darkest);
+  --vb-color-scheme-1-body-color: var(--vb-color-neutral-dark);
+  --vb-color-scheme-1-secondary-color: var(--vb-color-neutral-light);
+  --vb-color-scheme-1-text-secondary: var(--vb-color-neutral-mid);
+  --vb-color-scheme-1-text-inverse: var(--vb-color-white);
+  --vb-color-scheme-1-text-brand-primary: var(--vb-brand-primary-500);
+  --vb-color-scheme-1-text-brand-secondary: var(--vb-brand-secondary-500);
+  --vb-color-scheme-1-text-brand-tertiary: var(--vb-brand-tertiary-500);
+  --vb-color-scheme-1-bg-body: var(--vb-color-neutral-lightest);
+  --vb-color-scheme-1-bg-secondary: var(--vb-color-neutral-lighter);
+  --vb-color-scheme-1-bg-tertiary: var(--vb-color-neutral-darker);
+  --vb-color-scheme-1-bg-inverse: var(--vb-color-neutral-darkest);
+  --vb-color-scheme-1-border-color: var(--vb-color-neutral-darkest);
+  --vb-color-scheme-1-border-color-secondary: var(--vb-color-neutral-light);
+  --vb-color-scheme-1-border-color-subtle: var(--vb-color-neutral-lighter);
+  --vb-color-scheme-1-alert-danger: var(--vb-color-danger);
+  --vb-color-scheme-1-alert-success: var(--vb-color-success);
+  --vb-color-scheme-1-alert-focus: var(--vb-color-focus);
+
+  /* ======================================================================
+     TYPOGRAPHY
+     Fonts: Poppins (headings / caps / menu) · Inter (text / buttons).
+     ====================================================================== */
+
+  /* ---- Font families ---- */
+  --vb-font-family-heading: "Poppins", system-ui, sans-serif;
+  --vb-font-family-body: "Inter", system-ui, sans-serif;
+  --vb-font-family-caps: "Poppins", system-ui, sans-serif;
+  --vb-font-family-buttons: "Inter", system-ui, sans-serif;
+
+  /* ---- Font weights (Figma: Font Weight/*) ---- */
+  --vb-font-weight-thin: 100;
+  --vb-font-weight-extra-light: 200;
+  --vb-font-weight-light: 300;
+  --vb-font-weight-normal: 400;
+  --vb-font-weight-medium: 500;
+  --vb-font-weight-semibold: 600;
+  --vb-font-weight-bold: 700;
+  --vb-font-weight-extra-bold: 800;
+  --vb-font-weight-black: 900;
+  --vb-font-weight-link: 500;
+
+  /* ---- Line heights ---- */
+  --vb-line-height-100: 1;
+  --vb-line-height-110: 1.1;
+  --vb-line-height-115: 1.15;
+  --vb-line-height-120: 1.2;
+  --vb-line-height-130: 1.3;
+  --vb-line-height-150: 1.5;
+
+  /* ---- Letter spacing ---- */
+  --vb-letter-spacing-tighter: -0.04em;
+  --vb-letter-spacing-tight: -0.02em;
+  --vb-letter-spacing-wide: 0.02em;
+
+  /* ---- Font sizes (Figma: Font Sizes/*) ---- */
+  --vb-font-size-display-1: 72px;
+  --vb-font-size-display-2: 56px;
+  --vb-font-size-h1: 64px;
+  --vb-font-size-h2: 48px;
+  --vb-font-size-h3: 40px;
+  --vb-font-size-h4: 32px;
+  --vb-font-size-h5: 24px;
+  --vb-font-size-h6: 20px;
+  --vb-font-size-lg: 20px;
+  --vb-font-size-md: 18px;
+  --vb-font-size-intro-big: 32px;  /* Figma: Intro/Big */
+  --vb-font-size-base: 16px;
+  --vb-font-size-sm: 14px;
+  --vb-font-size-xs: 12px;
+  --vb-font-size-micro: 10px;  /* Figma: Font Sizes/Text Micro */
+  --vb-font-size-caps: 12px;
+  --vb-font-size-display-error: 400px;
+
+  /* ---- Font sizes · Mobile (responsive headings) ---- */
+  --vb-font-size-display-1-mobile: 56px;
+  --vb-font-size-display-2-mobile: 48px;
+  --vb-font-size-h1-mobile: 40px;
+  --vb-font-size-h2-mobile: 36px;
+  --vb-font-size-h3-mobile: 32px;
+  --vb-font-size-h4-mobile: 24px;
+  --vb-font-size-h5-mobile: 20px;
+  --vb-font-size-h6-mobile: 18px;
+  --vb-font-size-intro-big-mobile: 24px;  /* Figma: Intro/Big · Mobile */
+  --vb-font-size-md-mobile: 16px;          /* Figma: Text/Medium · Mobile */
+
+  /* ---- Semantic type roles ---- */
+  --vb-heading-font-family: var(--vb-font-family-heading);
+  --vb-heading-font-weight: var(--vb-font-weight-semibold);
+  --vb-heading-line-height: var(--vb-line-height-110);
+
+  --vb-text-font-family: var(--vb-font-family-body);
+  --vb-text-line-height: var(--vb-line-height-130);
+
+  --vb-caps-font-family: var(--vb-font-family-caps);
+  --vb-caps-font-size: var(--vb-font-size-caps);
+  --vb-caps-line-height: var(--vb-line-height-115);
+
+  --vb-button-font-family: var(--vb-font-family-buttons);
+  --vb-button-line-height: var(--vb-line-height-115);
+  --vb-button-letter-spacing: var(--vb-letter-spacing-tight);
+
+  --vb-menu-font-family: var(--vb-font-family-heading);
+  --vb-menu-font-size: 12px;
+  --vb-menu-line-height: var(--vb-line-height-150);
+  --vb-menu-letter-spacing: var(--vb-letter-spacing-wide);
+
+  /* ======================================================================
+     SPACING & SIZING (Figma: Spacing/*)
+     ====================================================================== */
+  --vb-spacer-0: 0px;
+  --vb-spacer-1: 4px;
+  --vb-spacer-2: 8px;
+  --vb-spacer-3: 12px;
+  --vb-spacer-4: 16px;
+  --vb-spacer-5: 24px;
+  --vb-spacer-6: 32px;
+  --vb-spacer-7: 40px;
+  --vb-spacer-8: 48px;
+  --vb-spacer-9: 64px;
+  --vb-spacer-section-md: 80px;
+  --vb-spacer-section-lg: 112px;
+  --vb-spacer-section-xl: 160px;
+  --vb-spacer-section-xxl: 256px;
+
+  /* ======================================================================
+     RADIUS & BORDERS (Figma: Radius/* · Borders/*)
+     ====================================================================== */
+  --vb-radius-none: 0px;
+  --vb-radius-xtiny: 2px;
+  --vb-radius-tiny: 4px;
+  --vb-radius-xxxsmall: 6px;
+  --vb-radius-xxsmall: 8px;
+  --vb-radius-social: 6px;
+  --vb-radius-xsmall: 12px;
+  --vb-radius-small: 16px;
+  --vb-radius-medium: 24px;
+  --vb-radius-large: 32px;
+  --vb-radius-xlarge: 48px;
+  --vb-radius-xxlarge: 64px;
+  --vb-border-width: 1px;
+
+  /* ======================================================================
+     OPACITY primitives (Figma: Opacity/*) — subset in use so far
+     ====================================================================== */
+  --vb-opacity-neutral-darkest-30: rgba(0, 0, 0, 0.30);
+  --vb-opacity-neutral-darkest-60: rgba(0, 0, 0, 0.60);
+  --vb-opacity-white-15: rgba(255, 255, 255, 0.15);
+  --vb-opacity-white-30: rgba(255, 255, 255, 0.30);
+  --vb-opacity-white-50: rgba(255, 255, 255, 0.50);
+
+  /* ======================================================================
+     COMPONENT — Button (semantic, from Atoms/Button)
+     ====================================================================== */
+  --vb-button-radius: var(--vb-radius-small);
+  --vb-button-gap: var(--vb-spacer-2);
+  --vb-button-pad-y: 16px;
+  --vb-button-pad-x: 24px;
+  --vb-button-font-size: var(--vb-font-size-base);
+  --vb-button-pad-y-sm: 12px;
+  --vb-button-pad-x-sm: 16px;
+  --vb-button-font-size-sm: var(--vb-font-size-sm);
+  --vb-button-icon-size: 24px;
+  --vb-button-disabled-opacity: 0.3;
+
+  /* ======================================================================
+     SHADOWS (Figma effect styles)
+     ====================================================================== */
+  --vb-shadow-xxsmall: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --vb-shadow-xsmall: 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.10);
+  --vb-shadow-small: 0 2px 4px -2px rgba(0, 0, 0, 0.06), 0 4px 8px -2px rgba(0, 0, 0, 0.10);
+  --vb-shadow-medium: 0 4px 6px -2px rgba(0, 0, 0, 0.03), 0 12px 16px -4px rgba(0, 0, 0, 0.08);
+  --vb-shadow-large: 0 8px 8px -4px rgba(0, 0, 0, 0.03), 0 20px 24px -4px rgba(0, 0, 0, 0.08);
+  --vb-shadow-xlarge: 0 24px 48px -12px rgba(0, 0, 0, 0.18);
+  --vb-shadow-xxlarge: 0 32px 64px -12px rgba(0, 0, 0, 0.14);
+
+  /* ======================================================================
+     COMPONENT — Tooltip (Atoms/Tooltip)
+     ====================================================================== */
+  --vb-tooltip-radius: var(--vb-radius-xxsmall);
+  --vb-tooltip-pad-y: 12px;
+  --vb-tooltip-pad-x: 12px;
+  --vb-tooltip-font-size: var(--vb-font-size-xs);
+  --vb-tooltip-bg-dark: var(--vb-brand-primary-500);
+  --vb-tooltip-fg-dark: var(--vb-color-white);
+  --vb-tooltip-bg-light: var(--vb-color-white);
+  --vb-tooltip-fg-light: var(--vb-color-scheme-1-body-color);
+
+  /* ======================================================================
+     COMPONENT — Separator (Atoms/Separator)
+     ====================================================================== */
+  --vb-separator-color: var(--vb-color-scheme-1-border-color-subtle);
+  --vb-separator-thickness: var(--vb-border-width);
+}

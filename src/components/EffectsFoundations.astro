@@ -1,0 +1,93 @@
+---
+/**
+ * ATOMS — Radius, Shadows & AR, Separator, Tooltip.
+ * Everything is driven by --vb-* tokens (shadows, radius, tooltip, separator)
+ * and reuses existing foundations only.
+ */
+const shadows = ['xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
+const radii = ['tiny', 'xxsmall', 'xsmall', 'small', 'medium', 'large', 'xlarge', 'xxlarge'];
+const ratios: [string, string][] = [
+  ['16:9', '16 / 9'],
+  ['3:2', '3 / 2'],
+  ['4:3', '4 / 3'],
+  ['5:4', '5 / 4'],
+  ['2:1', '2 / 1'],
+  ['1:1', '1 / 1'],
+];
+const sides = ['top', 'bottom', 'left', 'right'];
+const TIP_MSG = 'A message which appears when a cursor is positioned over an icon, image, hyperlink, or other element in a graphical user interface.';
+const tipCols = [
+  { cls: 'vb-tooltip--dark', text: TIP_MSG },
+  { cls: 'vb-tooltip--light', text: TIP_MSG },
+  { cls: 'vb-tooltip--dark', text: 'Tooltips' },
+  { cls: 'vb-tooltip--light', text: 'Tooltips' },
+];
+---
+<div class="flex flex-col gap-12">
+
+  <!-- Shadows -->
+  <section class="flex flex-col gap-4">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Shadows</h3>
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-7">
+      {shadows.map((name) => (
+        <div class="flex flex-col items-center gap-3">
+          <div class="h-16 w-full rounded-box bg-base-100" style={`box-shadow: var(--vb-shadow-${name});`}></div>
+          <span class="font-mono text-[11px] text-base-content/60">{name}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Radius -->
+  <section class="flex flex-col gap-4">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Radius</h3>
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-8">
+      {radii.map((name) => (
+        <div class="flex flex-col items-center gap-3">
+          <div class="h-16 w-16 border border-base-300 bg-base-100" style={`border-radius: var(--vb-radius-${name});`}></div>
+          <span class="font-mono text-[11px] text-base-content/60">{name}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Aspect Ratios -->
+  <section class="flex flex-col gap-4">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Aspect Ratios</h3>
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+      {ratios.map(([label, ar]) => (
+        <div class="flex flex-col gap-2">
+          <div
+            class="flex w-full items-center justify-center rounded-box border border-base-300 bg-base-300 text-base-content/60"
+            style={`aspect-ratio: ${ar};`}
+          >
+            <span class="font-mono text-xs">{label}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Separator -->
+  <section class="flex flex-col gap-4">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Separator</h3>
+    <div class="rounded-box border border-base-300 bg-base-100 p-8">
+      <hr class="vb-separator" />
+    </div>
+  </section>
+
+  <!-- Tooltips -->
+  <section class="flex flex-col gap-4">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Tooltips</h3>
+    <div class="grid grid-cols-2 items-center gap-x-10 gap-y-14 rounded-box border border-base-300 bg-base-100 px-10 py-14 lg:grid-cols-4">
+      {sides.map((side) => (
+        tipCols.map((col) => (
+          <div class="flex items-center justify-center">
+            <span class={`vb-tooltip vb-tooltip--${side} ${col.cls}`}>{col.text}</span>
+          </div>
+        ))
+      ))}
+    </div>
+  </section>
+
+</div>

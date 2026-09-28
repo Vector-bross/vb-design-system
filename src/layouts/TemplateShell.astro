@@ -1,0 +1,45 @@
+---
+/** Standalone shell for a page template: the composition + a Mobile preview
+ *  toggle (440 device frame). Auto-activates mobile when loaded with ?mobile
+ *  (used by the portal thumbnail iframe). */
+import '../styles/global.css';
+interface Props { title?: string; }
+const { title = 'Template — Kickstart Theme' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <style is:global>
+      html, body { background: #fff; }
+      body.vb-tplshell { margin: 0; }
+      .vb-tplshell__ctl { position: fixed; bottom: 16px; right: 16px; z-index: 200; display: inline-flex; align-items: center; gap: var(--vb-spacer-2); padding: 8px 14px; border: 1px solid var(--vb-color-scheme-1-border-color-subtle); border-radius: var(--vb-radius-xxlarge); background: var(--vb-color-white); box-shadow: var(--vb-shadow-medium); font-family: var(--vb-font-family-body); font-size: var(--vb-font-size-sm); }
+      .vb-tplshell__ctl input { position: absolute; opacity: 0; width: 0; height: 0; }
+      .vb-tplshell__ctl input:checked ~ .vb-toggle__track { background: var(--vb-brand-primary-500); }
+      .vb-tplshell__ctl input:checked ~ .vb-toggle__track .vb-toggle__thumb { transform: translateX(16px); }
+      .vb-tplshell.is-mobileview { background: #ededed; }
+      .vb-tplshell.is-mobileview .vb-tpl { width: 440px; max-width: 100%; margin-inline: auto; border: 1px solid var(--vb-color-scheme-1-border-color); box-shadow: var(--vb-shadow-medium); overflow: hidden; background: #fff; }
+      .vb-tplshell.is-mobileview .vb-tpl [class*="-band"], .vb-tplshell.is-mobileview .vb-tpl .vb-cta-lg { left: auto !important; transform: none !important; width: 100% !important; margin-inline: 0 !important; }
+    </style>
+  </head>
+  <body class="text-base-content antialiased vb-tplshell">
+    <label class="vb-tplshell__ctl"><input type="checkbox" data-tpl-mobile /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+    <slot />
+    <script is:inline>
+      (function () {
+        var shell = document.querySelector('.vb-tplshell');
+        var cb = document.querySelector('[data-tpl-mobile]');
+        try { if (window.top !== window.self) { var ctl = document.querySelector('.vb-tplshell__ctl'); if (ctl) ctl.style.display = 'none'; } } catch (e) {}
+        var ROOTS = '.vb-nav-demo,.vb-hero,.vb-intro,[data-sec],.vb-quote,[data-hdr],.vb-media,.vb-card-h,.vb-accordion,.vb-gallery,.vb-404';
+        if (!cb) return;
+        cb.addEventListener('change', function () {
+          shell.classList.toggle('is-mobileview', cb.checked);
+          document.querySelectorAll(ROOTS).forEach(function (el) { el.classList.toggle('is-mobile', cb.checked); });
+        });
+        try { if (location.search.indexOf('mobile') !== -1) { cb.checked = true; cb.dispatchEvent(new Event('change')); } } catch (e) {}
+      })();
+    </script>
+  </body>
+</html>

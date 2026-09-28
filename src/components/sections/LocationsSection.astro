@@ -1,0 +1,44 @@
+---
+/**
+ * ORGANISMS · Page section — LocationsSection. Composes the existing location
+ * Card molecule in a 2-column grid. White band, title display-2.
+ */
+const placeholder = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const cards = [1, 2, 3, 4];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Locations section — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <div class="vb-sec-band vb-sec-band--white">
+    <div class="vb-sec" data-sec>
+      <p class="vb-sec__title">Locations</p>
+      <div class="vb-sec__grid vb-sec__grid--2 vb-sec__grid--slider">
+        {cards.map(() => (
+          <article class="vb-card">
+            <div class="vb-image" set:html={placeholder}></div>
+            <div class="vb-card__body">
+              <h3 class="vb-card__title">Location name</h3>
+              <p class="vb-card__sub vb-card__sub--light">Streetname 01<br />1000 City name</p>
+              <p class="vb-card__sub vb-card__sub--light vb-card__sub--muted">+32 12 34 56 78<br /><a href="mailto:name@email.com" class="vb-link">name@email.com</a></p>
+            </div>
+            <div class="vb-card__actions"><a href="#" class="vb-btn vb-btn--secondary vb-btn--small">View more</a></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

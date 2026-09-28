@@ -1,0 +1,48 @@
+---
+/** Bare layout — isolated component preview (no portal chrome). */
+import '../styles/global.css';
+interface Props { title?: string; }
+const { title = 'Preview' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <style is:global>
+      html, body { background: #fff; }
+      /* Preview: hide only the verbose styleguide label, keep the Mobile toggle. */
+      .vb-prev [data-tile] > div:first-child > span { display: none !important; }
+      .vb-prev { padding: var(--vb-spacer-5); }
+      /* Toggle bar: framed grey strip with controls on the right (toggle, then Export). */
+      .vb-prev [data-tile] > div:first-child { display: flex !important; align-items: center; justify-content: flex-end !important; gap: var(--vb-spacer-3); padding: 10px 14px !important; margin-bottom: var(--vb-spacer-4); border: 1px solid var(--vb-color-scheme-1-border-color-subtle) !important; border-radius: var(--vb-radius-tiny); background: var(--vb-color-scheme-1-bg-body) !important; }
+      /* contain full-bleed (100vw) bands within the preview so layout & image placeholders render correctly */
+      .vb-prev [class*="-band"], .vb-prev .vb-cta-lg, .vb-prev .vb-cta-media { left: auto !important; transform: none !important; width: 100% !important; margin-inline: 0 !important; }
+      .vb-tile-export { font-family: var(--vb-font-family-body); font-weight: 500; font-size: 13px; padding: 6px 12px; border: 1px solid var(--vb-color-scheme-1-border-color-subtle); border-radius: var(--vb-radius-tiny); background: var(--vb-color-white); color: var(--vb-color-scheme-1-emphasis-color); cursor: pointer; }
+      .vb-tile-export:hover { border-color: var(--vb-brand-primary-500); color: var(--vb-brand-primary-500); }
+      /* Mobile mode: frame the component at 440px, centered on a light grey backdrop.
+         The option bar stays full width — only the component is framed. */
+      .vb-prev.is-mobileview { background: #ededed; min-height: 100vh; }
+      .vb-prev [data-tile].vb-tile-mobile > :not(:first-child) { left: auto !important; transform: none !important; width: 440px !important; max-width: 100% !important; margin-inline: auto !important; border: 1px solid var(--vb-color-scheme-1-border-color); border-radius: var(--vb-radius-xsmall); box-shadow: var(--vb-shadow-medium); overflow: hidden; background: #fff; }
+    </style>
+  </head>
+  <body class="text-base-content antialiased vb-prev">
+    <slot />
+    <script is:inline>
+      (function () {
+        function sync() {
+          var any = document.querySelector('[data-mobile-toggle]:checked');
+          document.body.classList.toggle('is-mobileview', !!any);
+        }
+        document.querySelectorAll('[data-mobile-toggle]').forEach(function (t) {
+          t.addEventListener('change', function () {
+            var tile = t.closest('[data-tile]');
+            if (tile) tile.classList.toggle('vb-tile-mobile', t.checked);
+            sync();
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

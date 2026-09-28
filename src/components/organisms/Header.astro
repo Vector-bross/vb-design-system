@@ -1,0 +1,225 @@
+---
+/**
+ * ORGANISMS — Header. Atoms + molecules + tokens only.
+ * Layouts: Title page (image right/left), Blog, Job (reuses JobOpening),
+ * PersonProfile, LocationDetail, ContactUs. Full-bleed bands, content 1120.
+ * Each layout is a tile with a Mobile switch.
+ */
+import logo from '../../assets/brand/logo-vb.svg?raw';
+const placeholder = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+const socialRaw = import.meta.glob('../../assets/icons/social/*.svg', { query: '?raw', import: 'default', eager: true });
+const order = ['linkedin', 'instagram', 'facebook', 'tiktok', 'youtube'];
+const socials = order
+  .map((name) => {
+    const key = Object.keys(socialRaw).find((k) => k.includes(`/${name}.svg`));
+    return key ? { name, svg: socialRaw[key] as string } : null;
+  })
+  .filter(Boolean) as { name: string; svg: string }[];
+
+const p1 = 'Elit nisi in eleifend sed nisi. Pulvinar at orci, proin imperdiet commodo consectetur convallis risus.';
+const p2 = 'Lorem ipsum dolor sit amet, consectetur adipiscing.';
+const bio = 'Elit nisi in eleifend sed nisi. Pulvinar at orci, proin imperdiet commodo consectetur convallis risus. Sed condimentum enim dignissim adipiscing faucibus consequat, urna. Viverra purus et erat auctor aliquam. Risus, volutpat vulputate.';
+
+function tileHeader(label: string) { return label; }
+---
+<div class="flex flex-col gap-8">
+
+  <!-- Title page — image right -->
+  <div class="flex flex-col gap-4" data-tile>
+    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Title page · image right — desktop / mobile</span>
+      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+    </div>
+    <div class="vb-hdr-band vb-hdr-band--dark on-dark">
+      <div class="vb-hdr vb-hdr-title" data-hdr>
+        <div class="vb-hdr-title__content">
+          <div class="vb-hdr-title__text">
+            <div class="vb-hdr-title__col">
+              <p class="vb-hdr-h1 vb-hdr-title__h">Title page</p>
+              <p class="vb-hdr-title__lead">{p1}</p>
+            </div>
+            <p class="vb-hdr-title__p">{p2}</p>
+          </div>
+          <div><a href="#" class="vb-btn vb-btn--secondary">Call to action</a></div>
+        </div>
+        <div class="vb-hdr-title__media"><div class="vb-image" set:html={placeholder}></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Title page — image left -->
+  <div class="flex flex-col gap-4" data-tile>
+    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Title page · image left — desktop / mobile</span>
+      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+    </div>
+    <div class="vb-hdr-band vb-hdr-band--dark on-dark">
+      <div class="vb-hdr vb-hdr-title vb-hdr-title--left" data-hdr>
+        <div class="vb-hdr-title__content">
+          <div class="vb-hdr-title__text">
+            <div class="vb-hdr-title__col">
+              <p class="vb-hdr-h1 vb-hdr-title__h">Title page</p>
+              <p class="vb-hdr-title__lead">{p1}</p>
+            </div>
+            <p class="vb-hdr-title__p">{p2}</p>
+          </div>
+          <div><a href="#" class="vb-btn vb-btn--secondary">Call to action</a></div>
+        </div>
+        <div class="vb-hdr-title__media"><div class="vb-image" set:html={placeholder}></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blog -->
+  <div class="flex flex-col gap-4" data-tile>
+    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Blog — desktop / mobile</span>
+      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+    </div>
+    <div class="vb-hdr-band vb-hdr-band--light">
+      <div class="vb-hdr vb-hdr--tight vb-hdr-blog" data-hdr>
+        <div class="vb-hdr-blog__wrap">
+          <p class="vb-hdr-blog__date">01/01/2026</p>
+          <div class="vb-hdr-blog__head">
+            <p class="vb-hdr-h1 vb-hdr-blog__title">Blog title heading will go here lorem ipsum dolor sitamet</p>
+            <div class="vb-hdr-blog__meta">
+              <span class="vb-tag vb-tag--default"><span class="vb-tag__dot"></span>Category</span>
+              <span class="vb-tag vb-tag--default"><span class="vb-tag__dot"></span>Category</span>
+            </div>
+          </div>
+        </div>
+        <div class="vb-hdr-blog__img"><div class="vb-image" set:html={placeholder}></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job header -->
+  <div class="flex flex-col gap-4" data-tile>
+    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Job — desktop / mobile</span>
+      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+    </div>
+    <div class="vb-hdr-band vb-hdr-band--body">
+      <div class="vb-hdr vb-hdr-job" data-hdr style="padding-block: var(--vb-spacer-8);">
+        <div class="vb-hdr-job__content">
+          <p class="vb-hdr-h1 vb-hdr-job__title">Job title description here</p>
+          <div class="vb-hdr-job__meta">
+            <span class="vb-hdr-job__meta-item"><span class="vb-hdr-job__meta-label">Type:</span><span class="vb-hdr-job__meta-val">Fulltime</span></span>
+            <span class="vb-hdr-job__meta-item"><span class="vb-hdr-job__meta-label">Location:</span><span class="vb-hdr-job__meta-val">Leuven</span></span>
+          </div>
+        </div>
+        <div class="vb-hdr-job__aside">
+          <a href="#" class="vb-btn vb-btn--primary">Apply for this position</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Person profile (dark) -->
+  <div class="flex flex-col gap-4" data-tile>
+    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Person profile — desktop / mobile</span>
+      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+    </div>
+    <div class="vb-hdr-band vb-hdr-band--dark on-dark">
+      <div class="vb-hdr vb-hdr--tight vb-hdr-split vb-hdr-split--media-first" data-hdr>
+        <p class="vb-hdr-h1 vb-hdr-split__title">Firstname Lastname</p>
+        <div class="vb-hdr-split__row">
+          <div class="vb-hdr-media-sq"><div class="vb-image" set:html={placeholder}></div></div>
+          <div class="vb-hdr-card vb-hdr-card--white">
+            <div class="vb-hdr-card__inner vb-hdr-card__inner--person">
+              <div class="vb-hdr-person__addr">
+                <div class="vb-hdr-person__id">
+                  <p class="vb-hdr-h5">Firstname Lastname</p>
+                  <p class="vb-hdr-func">Long function, company</p>
+                </div>
+                <p class="vb-hdr-contact">+32 12 34 56 78<br /><a class="vb-hdr-email" href="mailto:name@email.com">name@email.com</a></p>
+              </div>
+              <div class="vb-hdr-person__para">
+                <p class="vb-hdr-para">{bio}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Location detail (light) -->
+  <div class="flex flex-col gap-4" data-tile>
+    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Location detail — desktop / mobile</span>
+      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+    </div>
+    <div class="vb-hdr-band vb-hdr-band--light">
+      <div class="vb-hdr vb-hdr--tight vb-hdr-split" data-hdr>
+        <p class="vb-hdr-h1 vb-hdr-split__title--dark">Location detail</p>
+        <div class="vb-hdr-split__row">
+          <div class="vb-hdr-card vb-hdr-card--bordered">
+            <div class="vb-hdr-card__inner">
+              <p class="vb-hdr-h4">Location name</p>
+              <div class="vb-hdr-stack">
+                <p class="vb-hdr-lines">Streetname 01</p>
+                <p class="vb-hdr-lines">1000 City name</p>
+              </div>
+              <div class="vb-hdr-stack">
+                <p class="vb-hdr-contact">+32 12 34 56 78</p>
+                <a class="vb-hdr-contact vb-hdr-email" href="mailto:name@email.com">name@email.com</a>
+              </div>
+              <div class="vb-hdr-socials">
+                {socials.map((s) => (<a href="#" class="vb-hdr-social" aria-label={s.name} set:html={s.svg}></a>))}
+              </div>
+            </div>
+          </div>
+          <div class="vb-hdr-media-sq"><div class="vb-image" set:html={placeholder}></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact us (light) -->
+  <div class="flex flex-col gap-4" data-tile>
+    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Contact us — desktop / mobile</span>
+      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+    </div>
+    <div class="vb-hdr-band vb-hdr-band--light">
+      <div class="vb-hdr vb-hdr--tight vb-hdr-split" data-hdr>
+        <p class="vb-hdr-h1 vb-hdr-split__title--dark">Contact us</p>
+        <div class="vb-hdr-split__row">
+          <div class="vb-hdr-card vb-hdr-card--bordered">
+            <div class="vb-hdr-card__inner">
+              <span class="vb-hdr-card__logo" set:html={logo}></span>
+              <div class="vb-hdr-stack">
+                <p class="vb-hdr-lines">Streetname 01</p>
+                <p class="vb-hdr-lines">1000 City name</p>
+              </div>
+              <div class="vb-hdr-stack">
+                <p class="vb-hdr-contact">+32 12 34 56 78</p>
+                <a class="vb-hdr-contact vb-hdr-email" href="mailto:name@email.com">name@email.com</a>
+              </div>
+              <div class="vb-hdr-socials">
+                {socials.map((s) => (<a href="#" class="vb-hdr-social" aria-label={s.name} set:html={s.svg}></a>))}
+              </div>
+            </div>
+          </div>
+          <div class="vb-hdr-media-sq"><div class="vb-image" set:html={placeholder}></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var hdr = tile.querySelector('[data-hdr]');
+      if (!t || !hdr || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { hdr.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

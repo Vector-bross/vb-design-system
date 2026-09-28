@@ -1,0 +1,98 @@
+---
+/**
+ * MOLECULES — Forms controls. Reuses atom icons + tokens only.
+ * Interactive: checkbox / radio / toggle are real inputs; toast is dismissable.
+ * Light + dark columns for controls; alerts + toast on light (per Figma).
+ */
+import tick from '../assets/icons/tick.svg?raw';
+import infoIcon from '../assets/icons/info-circle-2.svg?raw';
+import okIcon from '../assets/icons/tick-circle.svg?raw';
+import errIcon from '../assets/icons/danger.svg?raw';
+import close from '../assets/icons/close-circle.svg?raw';
+---
+<div class="flex flex-col divide-y divide-base-300">
+
+  <!-- Checkboxes / Radios / Toggles : light + dark -->
+  <section class="grid gap-8 py-8 first:pt-0 lg:grid-cols-2">
+    <!-- light -->
+    <div class="flex flex-col gap-8 rounded-box p-8">
+      <div class="flex flex-col gap-3">
+        <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Checkboxes</h3>
+        <label class="vb-control"><input type="checkbox" /><span class="vb-check__box" set:html={`<span>${tick}</span>`}></span>Checkbox</label>
+        <label class="vb-control"><input type="checkbox" checked /><span class="vb-check__box" set:html={`<span>${tick}</span>`}></span>Checkbox</label>
+        <label class="vb-control"><input type="checkbox" disabled /><span class="vb-check__box" set:html={`<span>${tick}</span>`}></span>Checkbox</label>
+      </div>
+      <div class="flex flex-col gap-3">
+        <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Radios</h3>
+        <label class="vb-control"><input type="radio" name="r-l" /><span class="vb-radio__dot"></span>Radio</label>
+        <label class="vb-control"><input type="radio" name="r-l" checked /><span class="vb-radio__dot"></span>Radio</label>
+        <label class="vb-control"><input type="radio" name="r-l" disabled /><span class="vb-radio__dot"></span>Radio</label>
+      </div>
+      <div class="flex flex-col gap-3">
+        <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Toggles</h3>
+        <label class="vb-control"><input type="checkbox" /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Option one</label>
+        <label class="vb-control"><input type="checkbox" checked /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Option one</label>
+        <label class="vb-control"><input type="checkbox" disabled /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Option one</label>
+      </div>
+    </div>
+    <!-- dark -->
+    <div class="on-dark flex flex-col gap-8 rounded-box p-8" style="background: var(--vb-color-scheme-1-bg-inverse);">
+      <div class="flex flex-col gap-3">
+        <h3 class="text-sm font-medium uppercase tracking-wide text-white/50">Checkboxes</h3>
+        <label class="vb-control"><input type="checkbox" /><span class="vb-check__box" set:html={`<span>${tick}</span>`}></span>Checkbox</label>
+        <label class="vb-control"><input type="checkbox" checked /><span class="vb-check__box" set:html={`<span>${tick}</span>`}></span>Checkbox</label>
+        <label class="vb-control"><input type="checkbox" disabled /><span class="vb-check__box" set:html={`<span>${tick}</span>`}></span>Checkbox</label>
+      </div>
+      <div class="flex flex-col gap-3">
+        <h3 class="text-sm font-medium uppercase tracking-wide text-white/50">Radios</h3>
+        <label class="vb-control"><input type="radio" name="r-d" /><span class="vb-radio__dot"></span>Radio</label>
+        <label class="vb-control"><input type="radio" name="r-d" checked /><span class="vb-radio__dot"></span>Radio</label>
+        <label class="vb-control"><input type="radio" name="r-d" disabled /><span class="vb-radio__dot"></span>Radio</label>
+      </div>
+      <div class="flex flex-col gap-3">
+        <h3 class="text-sm font-medium uppercase tracking-wide text-white/50">Toggles</h3>
+        <label class="vb-control"><input type="checkbox" /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Option one</label>
+        <label class="vb-control"><input type="checkbox" checked /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Option one</label>
+        <label class="vb-control"><input type="checkbox" disabled /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Option one</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- Alerts -->
+  <section class="flex flex-col gap-4 py-8">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Alerts</h3>
+    <div class="vb-alert vb-alert--info">
+      <span class="vb-alert__icon" set:html={infoIcon}></span>
+      <span class="vb-alert__body"><span class="vb-alert__title">Hello World</span><span class="vb-alert__desc">Some description here to give the user more context.</span></span>
+    </div>
+    <div class="vb-alert vb-alert--success">
+      <span class="vb-alert__icon" set:html={okIcon}></span>
+      <span class="vb-alert__body"><span class="vb-alert__title">Hello World</span><span class="vb-alert__desc">Some description here to give the user more context.</span></span>
+    </div>
+    <div class="vb-alert vb-alert--danger">
+      <span class="vb-alert__icon" set:html={errIcon}></span>
+      <span class="vb-alert__body"><span class="vb-alert__title">Hello World</span><span class="vb-alert__desc">Some description here to give the user more context.</span></span>
+    </div>
+  </section>
+
+  <!-- Toast -->
+  <section class="flex flex-col gap-4 py-8 last:pb-0">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Toast</h3>
+    <div class="vb-toast" data-toast>
+      <span>A message which appears briefly to confirm an action.</span>
+      <button type="button" class="vb-toast__close" aria-label="Dismiss" set:html={close}></button>
+    </div>
+  </section>
+
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-toast] .vb-toast__close').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var t = btn.closest('[data-toast]');
+        if (t) { t.style.transition = 'opacity .2s ease'; t.style.opacity = '0'; setTimeout(function () { t.style.display = 'none'; }, 200); }
+      });
+    });
+  })();
+</script>

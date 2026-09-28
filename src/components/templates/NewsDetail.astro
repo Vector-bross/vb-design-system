@@ -1,0 +1,30 @@
+---
+/**
+ * PAGE TEMPLATE — News detail.
+ * Assembled ONLY from existing components (single source). Composition — Figma 14278-82963.
+ * Header uses the "Blog" variant (3rd tile).
+ */
+import Navbar from '../organisms/Navbar.astro';
+import Breadcrumb from '../organisms/Breadcrumb.astro';
+import Header from '../organisms/Header.astro';
+import CkEditorStyles from '../sections/CkEditorStyles.astro';
+import NewsSection from '../sections/NewsSection.astro';
+import UspSection from '../sections/UspSection.astro';
+import CtaLarge from '../sections/CtaLarge.astro';
+import Newsletter from '../organisms/Newsletter.astro';
+import Footer from '../organisms/Footer.astro';
+
+interface Props { contained?: boolean; }
+const { contained = false } = Astro.props;
+---
+<div class={`vb-tpl${contained ? ' vb-tpl--contained' : ''}`} data-tpl>
+  <div class="vb-tpl__slot vb-tpl__slot--single"><Navbar /></div>
+  <div class="vb-tpl__slot"><Breadcrumb /></div>
+  <div class="vb-tpl__slot vb-tpl__slot--pick-3"><Header /></div>
+  <div class="vb-tpl__slot"><CkEditorStyles /></div>
+  <div class="vb-tpl__slot"><NewsSection /></div>
+  <div class="vb-tpl__slot"><UspSection /></div>
+  <div class="vb-tpl__slot"><CtaLarge /></div>
+  <div class="vb-tpl__slot"><Newsletter /></div>
+  <div class="vb-tpl__slot"><Footer /></div>
+</div>

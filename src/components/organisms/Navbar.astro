@@ -1,0 +1,167 @@
+---
+/**
+ * ORGANISMS — Navbar. Atoms + tokens only.
+ * Each variant is a tile with a Mobile switch (like the atoms/tiles):
+ * toggling swaps the desktop rendering for the mobile navbar.
+ */
+import logo from '../../assets/brand/logo-vb.svg?raw';
+import logoDark from '../../assets/brand/logo-dark.svg?raw';
+import chevron from '../../assets/icons/caret-down.svg?raw';
+import arrowRight from '../../assets/icons/arrow-right.svg?raw';
+const services = ['Service name', 'Service name', 'Service name', 'Service name'];
+const burger = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+const xicon = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+---
+<div class="flex flex-col gap-8">
+
+  <!-- Navbar (default) — desktop / mobile -->
+  <div class="flex flex-col gap-4" data-tile>
+    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Navbar — desktop / mobile</span>
+      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+    </div>
+    <div class="vb-nav-demo">
+      <!-- Desktop -->
+      <nav class="vb-navbar vb-nav-desk">
+        <a href="#" class="vb-navbar__logo" set:html={logo}></a>
+        <div class="vb-navbar__right">
+          <div class="vb-navbar__links">
+            <a href="#" class="vb-navbar__link">Homepage</a>
+            <div class="vb-navbar__item">
+              <span class="vb-navbar__link">Services<span class="vb-navbar__chev" set:html={chevron}></span></span>
+              <div class="vb-navbar__dropdown">
+                {services.map(() => (<a href="#">Service name<span class="vb-navbar__arrow" set:html={arrowRight}></span></a>))}
+              </div>
+            </div>
+            <a href="#" class="vb-navbar__link">About us</a>
+            <a href="#" class="vb-navbar__link">Careers</a>
+            <a href="#" class="vb-navbar__link">Newsroom</a>
+            <a href="#" class="vb-navbar__link">Team</a>
+            <a href="#" class="vb-navbar__link">Locations</a>
+            <a href="#" class="vb-navbar__link">FAQs</a>
+          </div>
+          <a href="#" class="vb-btn vb-btn--secondary">Contact us</a>
+        </div>
+      </nav>
+      <!-- Mobile -->
+      <div class="vb-navm-wrap">
+        <div class="vb-navm" data-navm>
+          <div class="vb-navm__bar">
+            <a href="#" class="vb-navm__logo vb-navm__logo--light" set:html={logo}></a>
+            <a href="#" class="vb-navm__logo vb-navm__logo--dark" set:html={logoDark}></a>
+            <button type="button" class="vb-navm__burger" data-navm-toggle aria-label="Menu">
+              <span class="vb-navm__bars" set:html={burger}></span>
+              <span class="vb-navm__x" set:html={xicon}></span>
+            </button>
+          </div>
+          <div class="vb-navm__panel">
+            <a href="#" class="vb-navm__mitem">Homepage</a>
+            <button type="button" class="vb-navm__mitem" data-navm-sub aria-expanded="false">Services<span class="vb-navbar__chev" set:html={chevron}></span></button>
+            <div class="vb-navm__sub">{services.map(() => (<a href="#">Service name</a>))}</div>
+            <a href="#" class="vb-navm__mitem">About us</a>
+            <a href="#" class="vb-navm__mitem">Careers</a>
+            <a href="#" class="vb-navm__mitem">Newsroom</a>
+            <a href="#" class="vb-navm__mitem">Team</a>
+            <a href="#" class="vb-navm__mitem">Locations</a>
+            <a href="#" class="vb-navm__mitem">Contact us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar with meta bar — desktop / mobile -->
+  <div class="flex flex-col gap-4" data-tile>
+    <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+      <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Navbar with meta bar — desktop / mobile</span>
+      <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+    </div>
+    <div class="vb-nav-demo">
+      <!-- Desktop meta -->
+      <nav class="vb-navbar vb-navbar--meta vb-nav-desk">
+        <a href="#" class="vb-navbar__logo" set:html={logo}></a>
+        <div class="vb-navbar__right">
+          <div class="vb-navbar__meta-row">
+            <a href="#" class="vb-navbar__meta-link">Label meta here</a>
+            <a href="#" class="vb-navbar__meta-link">Label meta here</a>
+            <a href="#" class="vb-navbar__meta-link">Label meta here</a>
+            <div class="vb-navbar__item">
+              <span class="vb-navbar__lang">EN<span class="vb-navbar__chev" set:html={chevron}></span></span>
+              <div class="vb-navbar__dropdown vb-navbar__dropdown--sm">
+                <a href="#">FR</a>
+                <a href="#">NL</a>
+              </div>
+            </div>
+          </div>
+          <div class="vb-navbar__meta-row">
+            <div class="vb-navbar__links">
+              <a href="#" class="vb-navbar__link">Homepage</a>
+              <div class="vb-navbar__item">
+                <span class="vb-navbar__link">Services<span class="vb-navbar__chev" set:html={chevron}></span></span>
+                <div class="vb-navbar__dropdown">{services.map(() => (<a href="#">Service name<span class="vb-navbar__arrow" set:html={arrowRight}></span></a>))}</div>
+              </div>
+              <a href="#" class="vb-navbar__link">About us</a>
+              <a href="#" class="vb-navbar__link">Careers</a>
+              <a href="#" class="vb-navbar__link">Newsroom</a>
+              <a href="#" class="vb-navbar__link">Team</a>
+              <a href="#" class="vb-navbar__link">Locations</a>
+            </div>
+            <a href="#" class="vb-btn vb-btn--secondary">Contact us</a>
+          </div>
+        </div>
+      </nav>
+      <!-- Mobile -->
+      <div class="vb-navm-wrap">
+        <div class="vb-navm" data-navm>
+          <div class="vb-navm__bar">
+            <a href="#" class="vb-navm__logo vb-navm__logo--light" set:html={logo}></a>
+            <a href="#" class="vb-navm__logo vb-navm__logo--dark" set:html={logoDark}></a>
+            <button type="button" class="vb-navm__burger" data-navm-toggle aria-label="Menu">
+              <span class="vb-navm__bars" set:html={burger}></span>
+              <span class="vb-navm__x" set:html={xicon}></span>
+            </button>
+          </div>
+          <div class="vb-navm__panel">
+            <a href="#" class="vb-navm__mitem">Homepage</a>
+            <button type="button" class="vb-navm__mitem" data-navm-sub aria-expanded="false">Services<span class="vb-navbar__chev" set:html={chevron}></span></button>
+            <div class="vb-navm__sub">{services.map(() => (<a href="#">Service name</a>))}</div>
+            <a href="#" class="vb-navm__mitem">About us</a>
+            <a href="#" class="vb-navm__mitem">Careers</a>
+            <a href="#" class="vb-navm__mitem">Newsroom</a>
+            <a href="#" class="vb-navm__mitem">Team</a>
+            <a href="#" class="vb-navm__mitem">Locations</a>
+            <a href="#" class="vb-navm__mitem">Contact us</a>
+            <div class="vb-navm__metarow">
+              <a href="#" class="vb-navm__metalink">Label meta here</a>
+              <a href="#" class="vb-navm__metalink">Label meta here</a>
+              <a href="#" class="vb-navm__metalink">Label meta here</a>
+            </div>
+            <a href="#" class="vb-navm__lang">EN / FR / NL</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script is:inline>
+  (function () {
+    // Mobile switch: swap desktop <-> mobile rendering per tile.
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var demo = tile.querySelector('.vb-nav-demo');
+      if (!t || !demo || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { demo.classList.toggle('is-mobile', t.checked); });
+    });
+    // Mobile navbar interactivity (hamburger + Services expand).
+    document.querySelectorAll('[data-navm]').forEach(function (nav) {
+      var toggle = nav.querySelector('[data-navm-toggle]');
+      if (toggle) toggle.addEventListener('click', function () { nav.classList.toggle('is-open'); });
+      nav.querySelectorAll('[data-navm-sub]').forEach(function (b) {
+        b.addEventListener('click', function () { b.setAttribute('aria-expanded', b.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'); });
+      });
+    });
+  })();
+</script>

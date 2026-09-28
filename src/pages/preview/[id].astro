@@ -1,0 +1,42 @@
+---
+import Bare from '../../layouts/Bare.astro';
+import { catalog, cleanSource } from '../../lib/catalog';
+import { registry, byId } from '../../registry';
+
+export function getStaticPaths() {
+  return registry.map((e) => ({ params: { id: e.id } }));
+}
+const { id } = Astro.params as { id: string };
+const item = catalog[id];
+const entry = byId(id);
+const Comp = item?.Component;
+const filename = `${(entry?.name ?? id).replace(/[^A-Za-z0-9]/g, '')}.astro`;
+const srcJson = JSON.stringify(cleanSource(item?.src ?? '')).replace(/</g, '\\u003c');
+---
+<Bare title={entry?.name ?? id}>
+  <script type="application/json" id="vb-prev-src" set:html={srcJson}></script>
+  <span id="vb-prev-file" hidden>{filename}</span>
+  {Comp ? <Comp /> : <p style="padding:2rem">Unknown component: {id}</p>}
+  <script is:inline>
+    (function () {
+      var src = '';
+      try { src = JSON.parse(document.getElementById('vb-prev-src').textContent || '""'); } catch (e) {}
+      var filename = (document.getElementById('vb-prev-file') || {}).textContent || 'component.astro';
+      function download() {
+        var blob = new Blob([src], { type: 'text/plain;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url; a.download = filename;
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      }
+      // Add an Export button next to the Mobile toggle in every tile bar.
+      document.querySelectorAll('[data-tile] > div:first-child').forEach(function (bar) {
+        var btn = document.createElement('button');
+        btn.type = 'button'; btn.className = 'vb-tile-export'; btn.textContent = 'Export .astro ↓';
+        btn.addEventListener('click', download);
+        bar.appendChild(btn);
+      });
+    })();
+  </script>
+</Bare>

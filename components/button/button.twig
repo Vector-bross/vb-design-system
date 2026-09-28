@@ -1,0 +1,12 @@
+{% set tag = url ? 'a' : 'button' %}
+{% set classes = [
+  'button',
+  'button--' ~ (variant|default('primary')),
+  'button--' ~ (size|default('md')),
+] %}
+<{{ tag }}
+  class="{{ classes|join(' ') }}"
+  {%- if url %} href="{{ url }}"{% endif %}
+  {%- if disabled %} disabled aria-disabled="true"{% endif %}>
+  {{ label }}
+</{{ tag }}>

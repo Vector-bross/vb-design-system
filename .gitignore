@@ -1,0 +1,10 @@
+dist/
+node_modules/
+.astro/
+.env
+.env.production
+.DS_Store
+
+# build caches
+.vercel
+*.log

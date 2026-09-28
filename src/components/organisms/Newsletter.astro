@@ -1,0 +1,39 @@
+---
+/**
+ * ORGANISMS — Newsletter. Atoms + tokens only.
+ * bg-body box (radius small) with centered title (h3), email input + Subscribe
+ * button inline, and a terms line with a link. Mobile: stacked, full width.
+ */
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Newsletter — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <div class="vb-news-band">
+    <div class="vb-news">
+      <div class="vb-news__box" data-hdr>
+        <div class="vb-news__content">
+          <p class="vb-news__title">Subscribe to our newsletter</p>
+          <div class="vb-news__actions">
+            <div class="vb-news__input"><input class="vb-input" type="email" placeholder="Enter your email" /></div>
+            <button type="button" class="vb-btn vb-btn--primary">Subscribe</button>
+          </div>
+        </div>
+        <p class="vb-news__terms">By clicking Sign Up you're confirming that you agree with our <a href="#">terms and Conditions</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var box = tile.querySelector('[data-hdr]');
+      if (!t || !box || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { box.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

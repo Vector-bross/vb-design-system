@@ -1,0 +1,25 @@
+---
+/**
+ * ORGANISMS — Breadcrumb. Atoms + tokens only.
+ * Chips (bg-body, radius-tiny, Caps Medium brand-primary) separated by "/"
+ * (secondary-color). Last item = current (Caps Normal, body-color, no chip).
+ */
+const items = ['Home', 'Level 2', 'Level3', 'Level 4'];
+const current = 'Current';
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Breadcrumb</span>
+  </div>
+  <nav class="vb-breadcrumb" aria-label="Breadcrumb">
+    <div class="vb-breadcrumb__inner">
+      {items.map((label) => (
+        <>
+          <a href="#" class="vb-breadcrumb__chip">{label}</a>
+          <span class="vb-breadcrumb__sep" aria-hidden="true">/</span>
+        </>
+      ))}
+      <span class="vb-breadcrumb__current" aria-current="page">{current}</span>
+    </div>
+  </nav>
+</div>

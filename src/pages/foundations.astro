@@ -1,0 +1,24 @@
+---
+import PortalShell from '../layouts/PortalShell.astro';
+const layers = [
+  { href: 'atoms.html', k: 'Atomic · 01', t: 'Atoms', d: 'Tokens, typography, colors, buttons, logo & icons, radius/shadows.' },
+  { href: 'molecules.html', k: 'Atomic · 02', t: 'Molecules', d: 'Controls, fields, forms, tiles, cards & CTA, empty state.' },
+  { href: 'organisms.html', k: 'Atomic · 03', t: 'Organisms', d: 'Navbar, breadcrumb, hero, header, newsletter, footer.' },
+  { href: 'sections.html', k: 'Atomic · 04', t: 'Page sections 1', d: 'News, Team, Why us?, Services, Jobs, Locations.' },
+  { href: 'sections2.html', k: 'Atomic · 04', t: 'Page sections 2', d: 'FAQ, Stats, Brands, Form, Modal.' },
+];
+---
+<PortalShell title="Foundations — Kickstart Theme" active="foundations">
+  <div class="vb-lib__head">
+    <h1 class="vb-lib__title">Foundations</h1>
+  </div>
+  <div class="vb-home__doors" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+    {layers.map((l) => (
+      <a class="vb-door" href={l.href}>
+        <span class="vb-door__k">{l.k}</span>
+        <span class="vb-door__t" style="font-size: var(--vb-font-size-h5);">{l.t}</span>
+        <span class="vb-door__d">{l.d}</span>
+      </a>
+    ))}
+  </div>
+</PortalShell>

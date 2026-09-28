@@ -1,0 +1,29 @@
+'$schema': 'https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json'
+name: Button
+status: stable
+description: Bouton d'action, variantes primary/secondary et 3 tailles.
+props:
+  type: object
+  properties:
+    label:
+      type: string
+      title: Label
+      description: Texte du bouton.
+    variant:
+      type: string
+      title: Variant
+      enum: [primary, secondary]
+      default: primary
+    size:
+      type: string
+      title: Size
+      enum: [sm, md, lg]
+      default: md
+    url:
+      type: string
+      title: URL
+      description: Si renseigne, rend un <a> au lieu d'un <button>.
+    disabled:
+      type: boolean
+      title: Disabled
+      default: false

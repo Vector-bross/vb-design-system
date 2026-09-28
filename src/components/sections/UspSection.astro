@@ -1,0 +1,44 @@
+---
+/**
+ * ORGANISMS · Page section — USPSection ("Why us?"). Composes existing
+ * ServiceTile molecule (icon + title + text) in a grid. White band, View all.
+ */
+import serviceIcon from '../../assets/icons/service-cube.svg?raw';
+const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum.';
+const tiles = [1, 2, 3, 4, 5, 6];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Why us? section — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <div class="vb-sec-band vb-sec-band--white">
+    <div class="vb-sec" data-sec>
+      <p class="vb-sec__title">Why us?</p>
+      <div class="vb-sec__grid">
+        {tiles.map(() => (
+          <div class="vb-feature">
+            <span class="vb-feature__icon" set:html={serviceIcon}></span>
+            <div class="vb-feature__body">
+              <h3 class="vb-feature__title">Title lorem ipsum</h3>
+              <p class="vb-feature__text">{text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="vb-sec__actions"><a href="#" class="vb-btn vb-btn--secondary">View all</a></div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

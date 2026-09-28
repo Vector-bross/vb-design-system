@@ -1,0 +1,51 @@
+---
+/**
+ * ORGANISMS · Page section — JobsSection. Composes the existing JobOpening
+ * molecule stacked in a list. White band, title h2.
+ */
+const jobDesc = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum.';
+const jobs = [1, 2, 3];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Jobs section — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <div class="vb-sec-band vb-sec-band--white">
+    <div class="vb-sec" data-sec>
+      <p class="vb-sec__title vb-sec__title--h2">Our job opening</p>
+      <div class="vb-sec__list vb-sec__list--tight">
+        {jobs.map(() => (
+          <article class="vb-job">
+            <div class="vb-job__left">
+              <h3 class="vb-job__title">Job title description here</h3>
+              <div class="vb-job__meta">
+                <span><span class="vb-job__meta-label">Type:</span> <span class="vb-job__meta-val">Fulltime</span></span>
+                <span><span class="vb-job__meta-label">Location:</span> <span class="vb-job__meta-val">Leuven</span></span>
+              </div>
+            </div>
+            <div class="vb-job__right">
+              <p class="vb-job__desc">{jobDesc}</p>
+              <a href="#" class="vb-btn vb-btn--tertiary">Read more</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () {
+        sec.classList.toggle('is-mobile', t.checked);
+        sec.querySelectorAll('.vb-job').forEach(function (el) { el.classList.toggle('is-mobile', t.checked); });
+      });
+    });
+  })();
+</script>

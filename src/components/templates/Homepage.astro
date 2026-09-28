@@ -1,0 +1,51 @@
+---
+/**
+ * PAGE TEMPLATE — Homepage.
+ * Assembled ONLY from existing components (single source: the exact same
+ * component files used by the styleguide are imported here — no markup is
+ * duplicated). The styleguide "tile" chrome (the per-variant toggle bar) is
+ * hidden via CSS (.vb-tpl [data-tile] > :first-child), and multi-variant
+ * components (Navbar, Hero) are constrained to their first variant with
+ * .vb-tpl__slot--single. Mobile is driven by a single master toggle that
+ * reuses each component's own [data-mobile-toggle] wiring.
+ *
+ * Composition order — Figma 12334-33379.
+ */
+import Navbar from '../organisms/Navbar.astro';
+import Hero from '../organisms/Hero.astro';
+import IntroBanner from '../tiles/IntroBanner.astro';
+import TextContentSection from '../sections/TextContentSection.astro';
+import Quote from '../tiles/Quote.astro';
+import ServicesSection from '../sections/ServicesSection.astro';
+import CtaSmall from '../sections/CtaSmall.astro';
+import NewsSection from '../sections/NewsSection.astro';
+import UspSection from '../sections/UspSection.astro';
+import TeamSection from '../sections/TeamSection.astro';
+import BrandsSection from '../sections/BrandsSection.astro';
+import StatsSection from '../sections/StatsSection.astro';
+import FaqSection from '../sections/FaqSection.astro';
+import CtaLarge from '../sections/CtaLarge.astro';
+import Newsletter from '../organisms/Newsletter.astro';
+import Footer from '../organisms/Footer.astro';
+
+interface Props { contained?: boolean; }
+const { contained = false } = Astro.props;
+---
+<div class={`vb-tpl${contained ? ' vb-tpl--contained' : ''}`} data-tpl>
+  <div class="vb-tpl__slot vb-tpl__slot--single"><Navbar /></div>
+  <div class="vb-tpl__slot vb-tpl__slot--single"><Hero /></div>
+  <div class="vb-tpl__slot"><IntroBanner /></div>
+  <div class="vb-tpl__slot"><TextContentSection /></div>
+  <div class="vb-tpl__slot"><Quote /></div>
+  <div class="vb-tpl__slot"><ServicesSection /></div>
+  <div class="vb-tpl__slot"><CtaSmall /></div>
+  <div class="vb-tpl__slot"><NewsSection /></div>
+  <div class="vb-tpl__slot"><UspSection /></div>
+  <div class="vb-tpl__slot"><TeamSection /></div>
+  <div class="vb-tpl__slot"><BrandsSection /></div>
+  <div class="vb-tpl__slot"><StatsSection /></div>
+  <div class="vb-tpl__slot"><FaqSection /></div>
+  <div class="vb-tpl__slot"><CtaLarge /></div>
+  <div class="vb-tpl__slot"><Newsletter /></div>
+  <div class="vb-tpl__slot"><Footer /></div>
+</div>

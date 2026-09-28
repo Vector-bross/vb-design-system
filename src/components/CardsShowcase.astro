@@ -1,0 +1,184 @@
+---
+/**
+ * MOLECULES — Cards & CTA (Card-vertical). Atoms + tokens only.
+ * 4 layouts: TeamMember, News, Simple (Service), Location. White cards.
+ */
+const placeholder = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+import serviceIcon from '../assets/icons/service-cube.svg?raw';
+const featureText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum.';
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Cards &amp; CTA — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-cards">
+    <!-- TeamMember -->
+    <article class="vb-card">
+      <div class="vb-image" set:html={placeholder}></div>
+      <div class="vb-card__body">
+        <h3 class="vb-card__title">Firstname Lastname</h3>
+        <p class="vb-card__sub">Function, company name</p>
+      </div>
+      <div class="vb-card__actions"><a href="#" class="vb-btn vb-btn--tertiary">Read more</a></div>
+    </article>
+
+    <!-- News -->
+    <article class="vb-card">
+      <div class="vb-image" set:html={placeholder}></div>
+      <div class="vb-card__meta">
+        <span class="vb-tag vb-tag--default"><span class="vb-tag__dot"></span>Category</span>
+        <span class="vb-card__date">01/01/2026</span>
+      </div>
+      <div class="vb-card__body">
+        <h3 class="vb-card__title">Blog title heading will go here lorem ipsum</h3>
+        <p class="vb-card__sub vb-card__sub--light">Pulvinar vivamus fringilla lacus nec metus bibendum egestas.</p>
+      </div>
+      <div class="vb-card__actions"><a href="#" class="vb-btn vb-btn--tertiary">Read more</a></div>
+    </article>
+
+    <!-- Simple / Service -->
+    <article class="vb-card">
+      <div class="vb-image" set:html={placeholder}></div>
+      <div class="vb-card__body">
+        <h3 class="vb-card__title vb-card__title--lg">Service name</h3>
+        <p class="vb-card__sub vb-card__sub--light">Pulvinar vivamus fringilla lacus nec metus bibendum egestas.</p>
+      </div>
+      <div class="vb-card__actions"><a href="#" class="vb-btn vb-btn--tertiary">Read more</a></div>
+    </article>
+
+    <!-- Location -->
+    <article class="vb-card">
+      <div class="vb-image" set:html={placeholder}></div>
+      <div class="vb-card__body">
+        <h3 class="vb-card__title">Location name</h3>
+        <p class="vb-card__sub vb-card__sub--light">Streetname 01<br />1000 City name</p>
+        <p class="vb-card__sub vb-card__sub--light vb-card__sub--muted">+32 12 34 56 78<br /><a href="mailto:name@email.com" class="vb-link">name@email.com</a></p>
+      </div>
+      <div class="vb-card__actions"><a href="#" class="vb-btn vb-btn--secondary vb-btn--small">View more</a></div>
+    </article>
+  </div>
+</div>
+
+<!-- ServiceTile (icon + title + text) -->
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">ServiceTile — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <div class="vb-cards">
+    {[1, 2, 3].map(() => (
+      <div class="vb-feature">
+        <span class="vb-feature__icon" set:html={serviceIcon}></span>
+        <div class="vb-feature__body">
+          <h3 class="vb-feature__title">Title lorem ipsum</h3>
+          <p class="vb-feature__text">{featureText}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<!-- Card horizontal -->
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Card horizontal — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <article class="vb-card-h">
+    <div class="vb-card-h__media"><div class="vb-image" set:html={placeholder}></div></div>
+    <div class="vb-card-h__content">
+      <div class="vb-card-h__body">
+        <h3 class="vb-card-h__title">Service name</h3>
+        <p class="vb-card-h__desc">Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel cla ...</p>
+      </div>
+      <a href="#" class="vb-btn vb-btn--tertiary">Read more</a>
+    </div>
+  </article>
+</div>
+
+<!-- JobOpening -->
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Job opening — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <article class="vb-job">
+    <div class="vb-job__left">
+      <h3 class="vb-job__title">Job title description here</h3>
+      <div class="vb-job__meta">
+        <span><span class="vb-job__meta-label">Type:</span> <span class="vb-job__meta-val">Fulltime</span></span>
+        <span><span class="vb-job__meta-label">Location:</span> <span class="vb-job__meta-val">Leuven</span></span>
+      </div>
+    </div>
+    <div class="vb-job__right">
+      <p class="vb-job__desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum.</p>
+      <a href="#" class="vb-btn vb-btn--tertiary">Read more</a>
+    </div>
+  </article>
+</div>
+
+<!-- CTA banner -->
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">CTA banner — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <div class="vb-cta">
+    <h3 class="vb-cta__title">Questions or comments?</h3>
+    <p class="vb-cta__text">Elit nisi in eleifend sed nisiulvinar at orci, proin imperdiet commodo consectetur convallis risus. Sed condimentum enim <a href="#" class="vb-link">dignissim adipiscing</a></p>
+    <div class="vb-cta__actions"><a href="#" class="vb-btn vb-btn--primary vb-btn--small">View more</a></div>
+  </div>
+</div>
+
+<!-- CTA-small (text + image) -->
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">CTA with media — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <div class="vb-cta-media-band">
+  <div class="vb-cta-media">
+    <div class="vb-cta-media__panel">
+      <div class="vb-cta-media__body">
+        <h3 class="vb-cta-media__title">Medium length heading here</h3>
+        <p class="vb-cta-media__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
+      </div>
+      <a href="#" class="vb-btn vb-btn--primary">Button primary</a>
+    </div>
+    <div class="vb-cta-media__media"><div class="vb-image" set:html={placeholder}></div></div>
+  </div>
+  </div>
+</div>
+
+<!-- CTA-large (full-width) -->
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">CTA large (full-width) — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <div class="vb-cta-lg">
+    <div class="vb-cta-lg__panel">
+      <div class="vb-cta-lg__body">
+        <h3 class="vb-cta-lg__title">Lorem ipsum dolor sitametconsecte.</h3>
+        <p class="vb-cta-lg__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.</p>
+      </div>
+      <a href="#" class="vb-btn vb-btn--primary">Contact us</a>
+    </div>
+    <div class="vb-cta-lg__media"><div class="vb-image" set:html={placeholder}></div></div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      if (!t || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () {
+        tile.querySelectorAll('.vb-cards, .vb-card-h, .vb-job, .vb-cta, .vb-cta-media, .vb-cta-lg').forEach(function (el) { el.classList.toggle('is-mobile', t.checked); });
+      });
+    });
+  })();
+</script>

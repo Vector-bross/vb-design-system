@@ -1,0 +1,51 @@
+---
+import PortalShell from '../layouts/PortalShell.astro';
+import ColorPalette from '../components/atoms/ColorPalette.astro';
+import Typography from '../components/atoms/Typography.astro';
+import ButtonsShowcase from '../components/ButtonsShowcase.astro';
+import LogoIcons from '../components/LogoIcons.astro';
+import EffectsFoundations from '../components/EffectsFoundations.astro';
+---
+<PortalShell title="Atoms — Kickstart Theme" active="atoms">
+  <div class="vb-lib__head">
+    <h1 class="vb-lib__title">Atoms</h1>
+  </div>
+
+  <div class="flex flex-col gap-12">
+
+    <section id="typography" class="scroll-mt-28">
+      <div class="flex flex-col gap-6 rounded border border-base-300 bg-base-100 p-8">
+        <h2 class="text-3xl font-semibold tracking-tight">Typography</h2>
+        <Typography />
+      </div>
+    </section>
+
+    <section id="colors" class="scroll-mt-28">
+      <div class="flex flex-col gap-6 rounded border border-base-300 bg-base-100 p-8">
+        <h2 class="text-3xl font-semibold tracking-tight">Colors</h2>
+        <ColorPalette />
+      </div>
+    </section>
+
+    <section id="buttons" class="scroll-mt-28">
+      <div class="flex flex-col gap-6 rounded border border-base-300 bg-base-100 p-8">
+        <h2 class="text-3xl font-semibold tracking-tight">Buttons</h2>
+        <ButtonsShowcase />
+      </div>
+    </section>
+
+    <section id="logo-icons" class="scroll-mt-28">
+      <div class="flex flex-col gap-6 rounded border border-base-300 bg-base-100 p-8">
+        <h2 class="text-3xl font-semibold tracking-tight">Logo &amp; Icons</h2>
+        <LogoIcons />
+      </div>
+    </section>
+
+    <section id="radius" class="scroll-mt-28">
+      <div class="flex flex-col gap-6 rounded border border-base-300 bg-base-100 p-8">
+        <h2 class="text-3xl font-semibold tracking-tight">Radius, Shadows &amp; AR, Sep, Tooltip</h2>
+        <EffectsFoundations />
+      </div>
+    </section>
+  </div>
+</PortalShell>

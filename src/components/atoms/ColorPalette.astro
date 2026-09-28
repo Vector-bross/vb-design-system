@@ -1,0 +1,83 @@
+---
+/**
+ * Color palette (ATOMS — Colors). Each swatch is driven directly by a --vb-* token,
+ * so this display always reflects tokens.css (the source of truth).
+ */
+type Swatch = { name: string; token: string };
+type Group = { title: string; swatches: Swatch[] };
+
+const groups: Group[] = [
+  {
+    title: 'Neutrals',
+    swatches: [
+      { name: 'White', token: '--vb-color-white' },
+      { name: 'Lightest', token: '--vb-color-neutral-lightest' },
+      { name: 'Lighter', token: '--vb-color-neutral-lighter' },
+      { name: 'Light', token: '--vb-color-neutral-light' },
+      { name: 'Neutral', token: '--vb-color-neutral' },
+      { name: 'Dark', token: '--vb-color-neutral-dark' },
+      { name: 'Darker', token: '--vb-color-neutral-darker' },
+      { name: 'Darkest', token: '--vb-color-neutral-darkest' },
+    ],
+  },
+  {
+    title: 'Brand · Primary',
+    swatches: [
+      { name: '200', token: '--vb-brand-primary-200' },
+      { name: '300', token: '--vb-brand-primary-300' },
+      { name: '400', token: '--vb-brand-primary-400' },
+      { name: '500', token: '--vb-brand-primary-500' },
+      { name: '600', token: '--vb-brand-primary-600' },
+      { name: '700', token: '--vb-brand-primary-700' },
+    ],
+  },
+  {
+    title: 'Brand · Secondary',
+    swatches: [
+      { name: '200', token: '--vb-brand-secondary-200' },
+      { name: '300', token: '--vb-brand-secondary-300' },
+      { name: '400', token: '--vb-brand-secondary-400' },
+      { name: '500', token: '--vb-brand-secondary-500' },
+      { name: '600', token: '--vb-brand-secondary-600' },
+      { name: '700', token: '--vb-brand-secondary-700' },
+    ],
+  },
+  {
+    title: 'Brand · Tertiary',
+    swatches: [
+      { name: '200', token: '--vb-brand-tertiary-200' },
+      { name: '300', token: '--vb-brand-tertiary-300' },
+      { name: '400', token: '--vb-brand-tertiary-400' },
+      { name: '500', token: '--vb-brand-tertiary-500' },
+      { name: '600', token: '--vb-brand-tertiary-600' },
+    ],
+  },
+  {
+    title: 'State',
+    swatches: [
+      { name: 'Success', token: '--vb-color-success' },
+      { name: 'Danger', token: '--vb-color-danger' },
+      { name: 'Focus', token: '--vb-color-focus' },
+      { name: 'Warning *', token: '--vb-color-warning' },
+    ],
+  },
+];
+---
+<div class="flex flex-col gap-8">
+  {groups.map((group) => (
+    <div class="flex flex-col gap-3">
+      <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">{group.title}</h3>
+      <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-6">
+        {group.swatches.map((s) => (
+          <div class="overflow-hidden rounded-box border border-base-300 bg-base-100">
+            <div class="h-16 w-full" style={`background: var(${s.token})`}></div>
+            <div class="px-3 py-2">
+              <div class="text-sm font-medium">{s.name}</div>
+              <div class="font-mono text-[11px] text-base-content/60">{s.token}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>

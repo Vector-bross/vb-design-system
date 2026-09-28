@@ -1,0 +1,43 @@
+---
+/**
+ * MOLECULES — Tiles / NumberedList. Numbered atom badges (01..) + blue text.
+ * Poppins SemiBold 20 #004cff, subtle dividers. Badges align to the first line.
+ */
+import n1 from '../../assets/icons/numbered/01.svg?raw';
+import n2 from '../../assets/icons/numbered/02.svg?raw';
+import n3 from '../../assets/icons/numbered/03.svg?raw';
+const items = [
+  { badge: n1, text: 'Dolor enim eu tortor urna sed duis nullaliquam vestibulum' },
+  { badge: n2, text: 'Proin imperdiet commodo consectetur convallis risus' },
+  { badge: n3, text: 'Dolor enim eu tortor urna sed duis nullaliquam vestibulum' },
+];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">NumberedList — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <div class="rounded-box border border-base-300 bg-base-100 p-8">
+    <ul class="vb-numlist">
+      {items.map((it) => (
+        <li class="vb-numlist__item">
+          <span class="vb-numlist__badge" set:html={it.badge}></span>
+          <span class="vb-numlist__text">{it.text}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      if (!t || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () {
+        tile.querySelectorAll('.vb-media, .vb-intro, .vb-textlist, .vb-gallery, .vb-numlist').forEach(function (el) { el.classList.toggle('is-mobile', t.checked); });
+      });
+    });
+  })();
+</script>

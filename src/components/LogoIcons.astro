@@ -1,0 +1,130 @@
+---
+/**
+ * Logo & Icons (ATOMS). Logo (light + dark), the Common icon set and Social
+ * icons — every SVG exported exactly from Figma (no reconstruction).
+ * Each swatch is downloadable as an .svg (hover → download button).
+ */
+import logoLight from '../assets/brand/logo-vb.svg?raw';
+import logoDark from '../assets/brand/logo-dark.svg?raw';
+import logoPlaceholder from '../assets/brand/logo-placeholder.svg?raw';
+const partnerLogos = Array.from({ length: 9 });
+
+const iconsRaw = import.meta.glob('../assets/icons/*.svg', { query: '?raw', import: 'default', eager: true });
+const socialRaw = import.meta.glob('../assets/icons/social/*.svg', { query: '?raw', import: 'default', eager: true });
+const numberedRaw = import.meta.glob('../assets/icons/numbered/*.svg', { query: '?raw', import: 'default', eager: true });
+
+const clean = (p) => p.split('/').pop().replace('.svg', '');
+const icons = Object.entries(iconsRaw)
+  .map(([p, svg]) => ({ name: clean(p), svg }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+const social = Object.entries(socialRaw)
+  .map(([p, svg]) => ({ name: clean(p), svg }));
+const numbered = Object.entries(numberedRaw)
+  .map(([p, svg]) => ({ name: String(parseInt(clean(p), 10)), svg }))
+  .sort((a, b) => Number(a.name) - Number(b.name));
+
+const dl = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 12 5 5 5-5"/><path d="M5 21h14"/></svg>`;
+---
+<div class="flex flex-col gap-10">
+
+  <!-- Company Logo -->
+  <section class="flex flex-col gap-4">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Company Logo</h3>
+    <div class="grid gap-4 sm:grid-cols-2">
+      <div class="vb-dlcell vb-logo-swatch flex items-center justify-center rounded border border-base-300 bg-base-100 p-8" data-dl data-name="logo-bolt">
+        <button class="vb-dl" aria-label="Download SVG" title="Download SVG" set:html={dl}></button>
+        <span set:html={logoLight}></span>
+      </div>
+      <div class="vb-dlcell vb-logo-swatch flex items-center justify-center rounded p-8" style="background: var(--vb-color-scheme-1-bg-inverse);" data-dl data-name="logo-bolt-inverse">
+        <button class="vb-dl vb-dl--onDark" aria-label="Download SVG" title="Download SVG" set:html={dl}></button>
+        <span set:html={logoDark}></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partner logos (placeholders) -->
+  <section class="flex flex-col gap-4">
+    <div class="flex items-baseline justify-between">
+      <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Partner logos</h3>
+      <span class="font-mono text-[11px] text-base-content/50">placeholder</span>
+    </div>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+      {partnerLogos.map((_, i) => (
+        <div class="vb-dlcell flex items-center justify-center rounded border border-base-300 bg-base-100 px-6 py-8" data-dl data-name={`partner-logo-${i + 1}`}>
+          <button class="vb-dl" aria-label="Download SVG" title="Download SVG" set:html={dl}></button>
+          <div class="vb-partner-swatch" set:html={logoPlaceholder} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Common icons -->
+  <section class="flex flex-col gap-4">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Icons — Common</h3>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-6">
+      {icons.map((ic) => (
+        <div class="vb-dlcell flex flex-col items-center gap-3 rounded border border-base-300 bg-base-100 p-4" data-dl data-name={ic.name}>
+          <button class="vb-dl" aria-label="Download SVG" title="Download SVG" set:html={dl}></button>
+          <div class="vb-icon-swatch flex h-12 items-center justify-center" set:html={ic.svg} />
+          <span class="font-mono text-[11px] text-base-content/60">{ic.name}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Numbered -->
+  <section class="flex flex-col gap-4">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Numbered</h3>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-6">
+      {numbered.map((ic) => (
+        <div class="vb-dlcell flex flex-col items-center gap-3 rounded border border-base-300 bg-base-100 p-4" data-dl data-name={`number-${ic.name}`}>
+          <button class="vb-dl" aria-label="Download SVG" title="Download SVG" set:html={dl}></button>
+          <div class="vb-icon-swatch flex h-12 items-center justify-center" set:html={ic.svg} />
+          <span class="font-mono text-[11px] text-base-content/60">{ic.name}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Social media -->
+  <section class="flex flex-col gap-4">
+    <h3 class="text-sm font-medium uppercase tracking-wide text-base-content/60">Social media</h3>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+      {social.map((ic) => (
+        <div class="vb-dlcell flex flex-col items-center gap-3 rounded border border-base-300 bg-base-100 p-4" data-dl data-name={`social-${ic.name}`}>
+          <button class="vb-dl" aria-label="Download SVG" title="Download SVG" set:html={dl}></button>
+          <div class="vb-social-swatch" set:html={ic.svg} />
+          <span class="font-mono text-[11px] text-base-content/60">{ic.name}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+</div>
+
+<script is:inline>
+  (function () {
+    function svgString(el) {
+      var svg = el.querySelector('svg');
+      if (!svg) return '';
+      var clone = svg.cloneNode(true);
+      if (!clone.getAttribute('xmlns')) clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      return '<?xml version="1.0" encoding="UTF-8"?>\n' + clone.outerHTML;
+    }
+    document.querySelectorAll('.vb-dl').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        var cell = btn.closest('[data-dl]');
+        if (!cell) return;
+        var str = svgString(cell);
+        if (!str) return;
+        var blob = new Blob([str], { type: 'image/svg+xml;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url; a.download = (cell.getAttribute('data-name') || 'icon') + '.svg';
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      });
+    });
+  })();
+</script>

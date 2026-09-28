@@ -1,0 +1,106 @@
+---
+import PortalShell from '../../layouts/PortalShell.astro';
+import { templates, templateById, templateCategories } from '../../lib/templates';
+import { byId } from '../../registry';
+
+export function getStaticPaths() {
+  return templates.map((t) => ({ params: { id: t.id } }));
+}
+const { id } = Astro.params as { id: string };
+const tpl = templateById(id)!;
+const catLabel = templateCategories.find((c) => c.id === tpl.category)?.label ?? tpl.category;
+---
+<PortalShell title={`${tpl.name} — Kickstart Theme`} active={`tpl-${id}`} base="../">
+  <p class="vb-detail__crumb"><a href="../index.html">Library</a> <span>›</span> {catLabel} <span>›</span> {tpl.name}</p>
+  <div class="vb-cd__top">
+    <h1 class="vb-detail__title">{tpl.name}</h1>
+    <div class="vb-cd__actions">
+      <button class="vb-icnbtn" data-copylink aria-label="Copy link" title="Copy link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+      </button>
+      <a class="vb-btnprimary" href={`../templates/${id}.html`} target="_blank" rel="noopener">Open full page ↗</a>
+    </div>
+  </div>
+
+  <div class="vb-cd vb-cd--tpl">
+    <div class="vb-cd__main">
+      <input type="checkbox" id="vb-stage-mobile" class="vb-stage-mobile-cb" data-stage-mobile />
+      <div class="vb-cd__bar">
+        <label class="vb-cd__mobile" for="vb-stage-mobile"><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+      </div>
+      <div class="vb-tplstage">
+        <a class="vb-detail__stageopen" href={`../templates/${id}.html`} target="_blank" rel="noopener" aria-label="Open the full page in a new tab"><span>Open full page ↗</span></a>
+        <iframe class="vb-tplstage__frame" src={`../templates/${id}.html`} scrolling="no" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <aside class="vb-cd__aside">
+      <section class="vb-cinfo">
+        <h2 class="vb-cinfo__title">Details</h2>
+        <div class="vb-cinfo__row"><dt>Category</dt><dd>{catLabel}</dd></div>
+        <div class="vb-cinfo__row"><dt>Sections</dt><dd>{tpl.components.length}</dd></div>
+        <div class="vb-cinfo__row"><dt>Status</dt><dd>{tpl.status === 'beta' ? 'Beta' : 'Ready'}</dd></div>
+      </section>
+
+      <section class="vb-cinfo">
+        <h2 class="vb-cinfo__title">Composition</h2>
+        <ol class="vb-tplcomp">
+          {tpl.components.map((slot) => (
+            <li class="vb-tplcomp__row">
+              {slot.reg && byId(slot.reg)
+                ? <a class="vb-tplcomp__name" href={`../c/${slot.reg}.html`}>{slot.label}</a>
+                : <span class="vb-tplcomp__name vb-tplcomp__name--plain">{slot.label}</span>}
+              {slot.variant && <span class="vb-tplcomp__variant">{slot.variant}</span>}
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="vb-cinfo">
+        <h2 class="vb-cinfo__title">Export &amp; resources</h2>
+        <a class="vb-cres" href={`../templates/${id}.html`} target="_blank" rel="noopener">
+          <span class="vb-cres__icn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></span>
+          <span class="vb-cres__text"><span class="vb-cres__t">Open full page</span><span class="vb-cres__s">The assembled page in a new tab</span></span>
+          <span class="vb-cres__chev">↗</span>
+        </a>
+        <a class="vb-cres" href={tpl.figma ?? '#'} target="_blank" rel="noopener" aria-disabled={tpl.figma ? undefined : 'true'}>
+          <span class="vb-cres__icn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><circle cx="17.5" cy="17.5" r="3.5"/></svg></span>
+          <span class="vb-cres__text"><span class="vb-cres__t">Figma</span><span class="vb-cres__s">Open the page (all variants)</span></span>
+          <span class="vb-cres__chev">›</span>
+        </a>
+        {tpl.figmaMenu && (
+          <a class="vb-cres" href={tpl.figmaMenu} target="_blank" rel="noopener">
+            <span class="vb-cres__icn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></span>
+            <span class="vb-cres__text"><span class="vb-cres__t">Figma — mobile menu</span><span class="vb-cres__s">Open the menu frame</span></span>
+            <span class="vb-cres__chev">›</span>
+          </a>
+        )}
+      </section>
+    </aside>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var stage = document.querySelector('.vb-tplstage');
+      var frame = document.querySelector('.vb-tplstage__frame');
+      // Scale the desktop (1440) render down to fit the stage width.
+      if (stage && frame) {
+        var fit = function () { frame.style.transform = 'scale(' + (stage.clientWidth / 1440) + ')'; };
+        fit();
+        window.addEventListener('load', fit);
+        window.addEventListener('resize', fit);
+        if (window.ResizeObserver) { try { new ResizeObserver(fit).observe(stage); } catch (e) {} }
+      }
+      // Mobile toggle swaps the iframe to the mobile (440) variant of the page.
+      var m = document.querySelector('[data-stage-mobile]');
+      if (m && frame) {
+        var base = frame.getAttribute('src');
+        m.addEventListener('change', function () { frame.src = m.checked ? base + '?mobile=1' : base; if (typeof fit === 'function') setTimeout(fit, 60); });
+      }
+      var linkBtn = document.querySelector('[data-copylink]');
+      if (linkBtn) linkBtn.addEventListener('click', function () {
+        navigator.clipboard.writeText(window.location.href).then(function () { linkBtn.classList.add('is-done'); setTimeout(function () { linkBtn.classList.remove('is-done'); }, 1200); });
+      });
+    })();
+  </script>
+</PortalShell>

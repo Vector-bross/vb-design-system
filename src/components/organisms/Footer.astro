@@ -1,0 +1,74 @@
+---
+/**
+ * ORGANISMS — Footer. Atoms + molecules + tokens only.
+ * Brand column (logo, contact, socials) + 3 menu columns + credits row
+ * (copyright, legal links [mobile], signature). Mobile: stacked.
+ */
+import logo from '../../assets/brand/logo-vb.svg?raw';
+import signature from '../../assets/brand/signature.svg?raw';
+const socialRaw = import.meta.glob('../../assets/icons/social/*.svg', { query: '?raw', import: 'default', eager: true });
+const order = ['linkedin', 'instagram', 'facebook', 'tiktok', 'youtube'];
+const socials = order
+  .map((name) => {
+    const key = Object.keys(socialRaw).find((k) => k.includes(`/${name}.svg`));
+    return key ? { name, svg: socialRaw[key] as string } : null;
+  })
+  .filter(Boolean) as { name: string; svg: string }[];
+const columns = ['Column menu', 'Column menu', 'Column menu'];
+const links = ['Link One', 'Link Two', 'Link Three', 'Link Four', 'Link Five'];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Footer — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <div class="vb-footer-band">
+    <div class="vb-footer" data-hdr>
+      <div class="vb-footer__links">
+        <div class="vb-footer__brand">
+          <div class="vb-footer__addr">
+            <span class="vb-footer__logo" set:html={logo}></span>
+            <div class="vb-footer__contact">
+              <p class="vb-footer__lines">Streetname 01<br />1000 City name</p>
+              <p class="vb-footer__lines">+32 12 34 56 78<br /><a class="vb-hdr-email" href="mailto:name@email.com">name@email.com</a></p>
+            </div>
+          </div>
+          <div class="vb-hdr-socials">
+            {socials.map((s) => (<a href="#" class="vb-hdr-social" aria-label={s.name} set:html={s.svg}></a>))}
+          </div>
+        </div>
+        {columns.map((title) => (
+          <div class="vb-footer__col">
+            <p class="vb-footer__col-title">{title}</p>
+            <div class="vb-footer__col-links">
+              {links.map((l) => (<a href="#" class="vb-footer__link">{l}</a>))}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="vb-footer__credits">
+        <div class="vb-footer__credits-left">
+          <p class="vb-footer__copy">© 2025 All rights reserved.</p>
+          <div class="vb-footer__legal">
+            <a href="#">Privacybeleid</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookies Settings</a>
+          </div>
+        </div>
+        <span class="vb-footer__sign" set:html={signature}></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var f = tile.querySelector('[data-hdr]');
+      if (!t || !f || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { f.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

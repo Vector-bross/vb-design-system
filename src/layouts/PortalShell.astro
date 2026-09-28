@@ -1,0 +1,77 @@
+---
+/** Portal shell — persistent left sidebar (Relume/Silk-style) + main area. */
+import '../styles/global.css';
+import logo from '../assets/brand/logo-vb.svg?raw';
+import { categories } from '../registry';
+import { templates, templateModules, singleTemplates, moduleTemplates } from '../lib/templates';
+interface Props { title?: string; active?: string; base?: string; }
+const { title = 'Kickstart Theme', active = '', base = '' } = Astro.props;
+const design = [
+  { id: 'atoms', label: 'Atoms', href: `${base}atoms.html` },
+  { id: 'molecules', label: 'Molecules', href: `${base}molecules.html` },
+  { id: 'organisms', label: 'Organisms', href: `${base}organisms.html` },
+  { id: 'sections', label: 'Page sections 1', href: `${base}sections.html` },
+  { id: 'sections2', label: 'Page sections 2', href: `${base}sections2.html` },
+  { id: 'textcontent', label: 'Text content', href: `${base}textcontent.html` },
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body class="text-base-content antialiased vb-app">
+    <aside class="vb-side">
+      <a class="vb-side__brand" href={`${base}index.html`}>
+        <span class="vb-side__logo" set:html={logo}></span>
+      </a>
+
+      <nav class="vb-side__nav">
+        <div class="vb-side__group">
+          <p class="vb-side__gtitle">Library</p>
+          <a href={`${base}index.html`} class={active === 'home' ? 'is-active' : ''}>Sections</a>
+          <a href={`${base}styleguide.html`} class={active === 'styleguide' ? 'is-active' : ''}>Styleguide</a>
+        </div>
+
+        <div class="vb-side__group">
+          <p class="vb-side__gtitle">Page templates</p>
+          <div class="vb-side__sub">
+            <p class="vb-side__subtitle">Single pages</p>
+            {singleTemplates().map((t) => (
+              <a href={`${base}t/${t.id}.html`} class={active === `tpl-${t.id}` ? 'is-active' : ''}>{t.name}</a>
+            ))}
+          </div>
+          {templateModules.map((m) => (
+            <div class="vb-side__sub">
+              <p class="vb-side__subtitle">{m.label} module</p>
+              {moduleTemplates(m.id).map((t) => (
+                <a href={`${base}t/${t.id}.html`} class={active === `tpl-${t.id}` ? 'is-active' : ''}>{t.name}</a>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        <div class="vb-side__group">
+          <p class="vb-side__gtitle">Categories</p>
+          {categories.map((c) => (
+            <a href={`${base}index.html#cat-${c.id}`}>{c.label}</a>
+          ))}
+        </div>
+
+        <div class="vb-side__group">
+          <p class="vb-side__gtitle">Design system</p>
+          {design.map((d) => (
+            <a href={d.href} class={active === d.id ? 'is-active' : ''}>{d.label}</a>
+          ))}
+        </div>
+      </nav>
+
+    </aside>
+
+    <main class="vb-main">
+      <slot />
+    </main>
+  </body>
+</html>

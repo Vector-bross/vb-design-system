@@ -1,0 +1,30 @@
+---
+/** Portal layout — shared chrome (top bar) for the component library portal. */
+import '../styles/global.css';
+import logo from '../assets/brand/logo-vb.svg?raw';
+interface Props { title?: string; active?: 'home' | 'library' | 'foundations'; base?: string; }
+const { title = 'Kickstart Theme', active, base = '' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body class="text-base-content antialiased" style="background: #fff;">
+    <header class="vb-portalbar">
+      <a href={`${base}index.html`} class="vb-portalbar__brand">
+        <span class="vb-portalbar__logo" set:html={logo}></span>
+        <span class="vb-portalbar__name">Kickstart Theme</span>
+      </a>
+      <nav class="vb-portalbar__nav">
+        <a href={`${base}library.html`} class={active === 'library' ? 'is-active' : ''}>Library</a>
+        <a href={`${base}foundations.html`} class={active === 'foundations' ? 'is-active' : ''}>Foundations</a>
+      </nav>
+    </header>
+    <main class="vb-portal">
+      <slot />
+    </main>
+  </body>
+</html>

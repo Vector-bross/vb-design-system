@@ -1,0 +1,52 @@
+---
+/**
+ * Button (ATOMS — Button). Faithful to Figma Atoms/Button.
+ * Props mirror the Figma variant properties: Style, Small, Icon position, State.
+ * Renders <a> when `href` is set, otherwise <button>.
+ */
+import arrow from '../../assets/icons/arrow-right.svg?raw';
+
+interface Props {
+  variant?: 'primary' | 'secondary' | 'tertiary';
+  small?: boolean;
+  icon?: 'none' | 'left' | 'right' | 'only';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  label?: string;
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  small = false,
+  icon = 'none',
+  href,
+  type = 'button',
+  disabled = false,
+  label,
+  class: extra,
+} = Astro.props;
+
+const cls = [
+  'vb-btn',
+  `vb-btn--${variant}`,
+  small && 'vb-btn--small',
+  icon === 'only' && 'vb-btn--icon-only',
+  extra,
+].filter(Boolean).join(' ');
+
+const Tag = href ? 'a' : 'button';
+---
+<Tag
+  class={cls}
+  href={href}
+  type={href ? undefined : type}
+  disabled={href ? undefined : disabled}
+  aria-disabled={disabled ? 'true' : undefined}
+  aria-label={icon === 'only' ? (label ?? 'Button') : undefined}
+>
+  {icon === 'left' && <span class="vb-btn__icon" set:html={arrow} />}
+  {icon !== 'only' && <span class="vb-btn__label"><slot>{label}</slot></span>}
+  {(icon === 'right' || icon === 'only') && <span class="vb-btn__icon" set:html={arrow} />}
+</Tag>

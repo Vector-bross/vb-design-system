@@ -1,0 +1,188 @@
+---
+/**
+ * ORGANISMS · CKEditorStyles — rich-text (CKEditor output) styles.
+ * Composes existing atoms/molecules only: headings & body (atoms), TextList,
+ * NumberedList, Table, Gallery (light), Quote/testimonial, CTA banner, buttons.
+ * Faithful to Figma 14278:85431. Tokens only.
+ */
+import arrow from '../../assets/icons/arrow-right.svg?raw';
+import n1 from '../../assets/icons/numbered/01.svg?raw';
+import n2 from '../../assets/icons/numbered/02.svg?raw';
+import n3 from '../../assets/icons/numbered/03.svg?raw';
+const placeholder = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const avatarIcon = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const bullets = [
+  'Suscipit tristique risus, at donec. In turpis vel etlutpat.',
+  'Que odio senectus nam posuere ornare leo metus, ultricies. Blandit duis ultriciess lorem sed',
+  'Posuere ornare leo metus, ultricies. Blandit duis ultricies vulputate mo',
+];
+const numbered = [
+  { badge: n1, text: 'Dolor enim eu tortor urna sed duis nullaliquam vestibulum' },
+  { badge: n2, text: 'Proin imperdiet commodo consectetur convallis risus' },
+  { badge: n3, text: 'Dolor enim eu tortor urna sed duis nullaliquam vestibulum' },
+];
+const testimonials = [
+  { text: '“Ultrices neque ipsum suspendisse lorem gravida dictum fusce placerat orcivitae cmauris rhoncus aenean lorem ipsum dolorsitamet”', name: 'Firstname Lastname', role: 'Function, company name' },
+  { text: '“Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas vestibulum tortor quam feugiat vitae”', name: 'Amelia Durand', role: 'Head of design, Vela' },
+  { text: '“Curabitur blandit tempus porttitor integer posuere erat a ante venenatis dapibus posuere velit aliquet nullam quis risus eget”', name: 'Marc Lefèvre', role: 'CTO, Northwind' },
+];
+const rows = [
+  ['Idleo in vitae turpis massa', 'Idleo in vitae turpis massa', '00'],
+  ['Massa sed elementum tempus egest', 'Massa sed elementum tempus egest', '00'],
+  ['Idleo in vitae turpis massa', 'Idleo in vitae turpis massa', '00'],
+  ['Massa sed elementum tempus egest', 'Massa sed elementum tempus egest', '00'],
+];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">CKEditor styles — rich text</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-rte" data-sec>
+    <div class="vb-rte__inner">
+      <h1 class="vb-rte__h1">Heading 1</h1>
+      <p class="vb-rte__lead">Dolor enim eu tortor urna sed duis nulla. Aliquam vestibulum, nulla odio nisl vitae. In aliquet pellentesque aenean hac vestibulum turpis mi bibendum diam. Tempor integer aliquam in vitae malesuada fringilla.</p>
+      <p class="vb-rte__p">Mi tincidunt elit, id quisque ligula ac diam, amet. <a href="#" class="vb-rte__link">Vel etiam suspendisse morbi eleifend faucibus</a> eget vestibulum felis. Dictum quis montes, sit sit. Tellus aliquam enim urna, etiam. Mauris posuere vulputate arcu amet, vitae nisi, tellus tincidunt.</p>
+
+      <h2 class="vb-rte__h2">Heading 2</h2>
+      <p class="vb-rte__p">Eget quis mi enim, leo lacinia pharetra, semper. Eget in volutpat mollis at volutpat lectus velit, sed auctor. Porttitor fames arcu quis fusce augue enim. Quis at habitant diam at. Suscipit tristique risus, at donec. In turpis vel et quam imperdiet. Ipsum molestie aliquet sodales id est ac volutpat.</p>
+      <ul class="vb-textlist">
+        {bullets.map((b) => (
+          <li class="vb-textlist__item"><span class="vb-textlist__bullet">&bull;</span><span class="vb-textlist__text">{b}</span></li>
+        ))}
+      </ul>
+      <p class="vb-rte__p">Tristique odio senectus nam posuere ornare leo metus, ultricies. Blandit duis ultricies vulputate morbi feugiat cras placerat elit. Aliquam tellus lorem sed ac. Montes, sed mattis pellentesque suscipit accumsan. Cursus viverra aenean magna risus elementum faucibus molestie pellentesque. Arcu ultricies sed mauris vestibulum.</p>
+
+      <figure class="vb-rte__gallery" data-gallery>
+        <div class="vb-rte__gallerystage">
+          <div class="vb-rte__gallerytrack" data-track>
+            <div class="vb-rte__galleryslide"><div class="vb-image" set:html={placeholder}></div></div>
+            <div class="vb-rte__galleryslide"><div class="vb-image" set:html={placeholder}></div></div>
+            <div class="vb-rte__galleryslide"><div class="vb-image" set:html={placeholder}></div></div>
+          </div>
+        </div>
+        <figcaption class="vb-rte__caption">Image caption goes here</figcaption>
+        <div class="vb-rte__slider">
+          <div class="vb-dots">
+            <span class="vb-dot is-active" data-dot></span><span class="vb-dot" data-dot></span><span class="vb-dot" data-dot></span>
+          </div>
+          <div class="vb-quote__arrows">
+            <button type="button" class="vb-icon-btn vb-icon-btn--flip" data-dir="prev" aria-label="Previous" set:html={arrow}></button>
+            <button type="button" class="vb-icon-btn" data-dir="next" aria-label="Next" set:html={arrow}></button>
+          </div>
+        </div>
+      </figure>
+
+      <h3 class="vb-rte__h3">Heading 3</h3>
+      <p class="vb-rte__p">Morbi sed imperdiet in ipsum, adipiscing elit dui lectus. Tellus id scelerisque est ultricies ultricies. Duis est sit sed leo nisl, blandit elit sagittis. Quisque tristique consequat quam sed. Nisl at scelerisque amet nulla purus habitasse.</p>
+      <p class="vb-rte__p">Eget quis mi enim, leo lacinia pharetra, semper. Eget in volutpat mollis at volutpat lectus velit, sed auctor. Porttitor fames arcu quis fusce augue enim. Quis at habitant diam at. Suscipit tristique risus, at donec. In turpis vel et quam imperdiet. Ipsum molestie aliquet sodales id est ac volutpat.</p>
+
+      <h4 class="vb-rte__h4">Heading 4</h4>
+      <p class="vb-rte__p">Eget quis mi enim, leo lacinia pharetra, semper. Eget in volutpat mollis at volutpat lectus velit, sed auctor. Porttitor fames arcu quis fusce augue enim. Quis at habitant diam at. Suscipit tristique risus, at donec. In turpis vel et quam imperdiet. Ipsum molestie aliquet sodales id est ac volutpat.</p>
+      <p class="vb-rte__p">Tristique odio senectus nam posuere ornare leo metus, ultricies. Blandit duis ultricies vulputate morbi feugiat cras placerat elit. Aliquam tellus lorem sed ac. Montes, sed mattis pellentesque suscipit accumsan. Cursus viverra aenean magna risus elementum faucibus molestie pellentesque.</p>
+
+      <h5 class="vb-rte__h5">Heading 5</h5>
+      <ul class="vb-numlist">
+        {numbered.map((it) => (
+          <li class="vb-numlist__item"><span class="vb-numlist__badge" set:html={it.badge}></span><span class="vb-numlist__text">{it.text}</span></li>
+        ))}
+      </ul>
+
+      <h6 class="vb-rte__h6">Heading 6</h6>
+      <div class="vb-table-wrap">
+        <table class="vb-table">
+          <thead><tr><th>Donec pretium vulputate sa</th><th>Donec pretium vulputate sa</th><th>Results</th></tr></thead>
+          <tbody>{rows.map((r) => (<tr><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td></tr>))}</tbody>
+        </table>
+      </div>
+
+      <h6 class="vb-rte__h6">Heading 6</h6>
+      <figure class="vb-rte__quote" data-quote data-quotes={JSON.stringify(testimonials)}>
+        <blockquote class="vb-rte__quotetext" data-quote-text>{testimonials[0].text}</blockquote>
+        <div class="vb-rte__quotefoot">
+          <div class="vb-rte__author">
+            <span class="vb-rte__avatar" set:html={avatarIcon}></span>
+            <div>
+              <div class="vb-rte__aname" data-quote-name>{testimonials[0].name}</div>
+              <div class="vb-rte__arole" data-quote-role>{testimonials[0].role}</div>
+            </div>
+          </div>
+          <div class="vb-quote__arrows">
+            <button type="button" class="vb-icon-btn vb-icon-btn--flip" data-dir="prev" aria-label="Previous" set:html={arrow}></button>
+            <button type="button" class="vb-icon-btn" data-dir="next" aria-label="Next" set:html={arrow}></button>
+          </div>
+        </div>
+      </figure>
+
+      <p class="vb-rte__p">Nunc sed faucibus bibendum feugiat sed interdum. Ipsum egestas condimentum mi massa. In tincidunt pharetra consectetur sed duis facilisis metus. Etiam egestas in nec sed et. Quis lobortis at sit dictum eget nibh tortor commodo cursus.</p>
+      <p class="vb-rte__p">Tristique odio senectus nam posuere ornare leo metus, ultricies. Blandit duis ultricies vulputate morbi feugiat cras placerat elit. Aliquam tellus lorem sed ac. Montes, sed mattis pellentesque suscipit accumsan.</p>
+
+      <h6 class="vb-rte__h6">Heading 6</h6>
+      <p class="vb-rte__p">Nunc sed faucibus bibendum feugiat sed interdum. Ipsum egestas condimentum mi massa. In tincidunt pharetra consectetur sed duis facilisis metus. Etiam egestas in nec sed et. Quis lobortis at sit dictum eget nibh tortor commodo cursus.</p>
+
+      <div class="vb-rte__buttons">
+        <a href="#" class="vb-btn vb-btn--primary">Primary button</a>
+        <a href="#" class="vb-btn vb-btn--secondary">Secondary button</a>
+      </div>
+
+      <div class="vb-cta vb-rte__questions">
+        <h3 class="vb-cta__title">Questions or comments?</h3>
+        <p class="vb-cta__text">Elit nisi in eleifend sed nisiulvinar at orci, proin imperdiet commodo consectetur convallis risus. Sed condimentum enim <a href="#" class="vb-link">dignissim adipiscing</a></p>
+        <div class="vb-cta__actions"><a href="#" class="vb-btn vb-btn--primary vb-btn--small">View more</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+
+    // Gallery slider
+    document.querySelectorAll('[data-gallery]').forEach(function (g) {
+      var track = g.querySelector('[data-track]');
+      var dots = g.querySelectorAll('[data-dot]');
+      var n = track ? track.children.length : 0;
+      var idx = 0;
+      function go(i) {
+        idx = (i + n) % n;
+        if (track) track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+        dots.forEach(function (d, di) { d.classList.toggle('is-active', di === idx); });
+      }
+      g.querySelectorAll('[data-dir]').forEach(function (b) {
+        b.addEventListener('click', function () { go(idx + (b.getAttribute('data-dir') === 'next' ? 1 : -1)); });
+      });
+      dots.forEach(function (d, di) { d.addEventListener('click', function () { go(di); }); });
+      go(0);
+    });
+
+    // Testimonial slider
+    document.querySelectorAll('[data-quote]').forEach(function (q) {
+      var list; try { list = JSON.parse(q.getAttribute('data-quotes')); } catch (e) { return; }
+      if (!list || !list.length) return;
+      var textEl = q.querySelector('[data-quote-text]');
+      var nameEl = q.querySelector('[data-quote-name]');
+      var roleEl = q.querySelector('[data-quote-role]');
+      var idx = 0;
+      function go(i) {
+        idx = (i + list.length) % list.length;
+        if (textEl) { textEl.style.opacity = '0'; }
+        setTimeout(function () {
+          if (textEl) { textEl.textContent = list[idx].text; textEl.style.opacity = '1'; }
+          if (nameEl) nameEl.textContent = list[idx].name;
+          if (roleEl) roleEl.textContent = list[idx].role;
+        }, 150);
+      }
+      q.querySelectorAll('[data-dir]').forEach(function (b) {
+        b.addEventListener('click', function () { go(idx + (b.getAttribute('data-dir') === 'next' ? 1 : -1)); });
+      });
+    });
+  })();
+</script>

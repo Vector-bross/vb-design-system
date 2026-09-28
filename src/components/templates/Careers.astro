@@ -1,0 +1,31 @@
+---
+/**
+ * PAGE TEMPLATE — Careers.
+ * Assembled ONLY from existing components (single source). Composition — Figma 14278-86276.
+ */
+import Navbar from '../organisms/Navbar.astro';
+import Breadcrumb from '../organisms/Breadcrumb.astro';
+import Header from '../organisms/Header.astro';
+import JobsSection from '../sections/JobsSection.astro';
+import CtaSmall from '../sections/CtaSmall.astro';
+import TextContentSection from '../sections/TextContentSection.astro';
+import FaqSection from '../sections/FaqSection.astro';
+import CtaLarge from '../sections/CtaLarge.astro';
+import Newsletter from '../organisms/Newsletter.astro';
+import Footer from '../organisms/Footer.astro';
+
+interface Props { contained?: boolean; }
+const { contained = false } = Astro.props;
+---
+<div class={`vb-tpl${contained ? ' vb-tpl--contained' : ''}`} data-tpl>
+  <div class="vb-tpl__slot vb-tpl__slot--single"><Navbar /></div>
+  <div class="vb-tpl__slot"><Breadcrumb /></div>
+  <div class="vb-tpl__slot vb-tpl__slot--single"><Header /></div>
+  <div class="vb-tpl__slot"><JobsSection /></div>
+  <div class="vb-tpl__slot"><CtaSmall /></div>
+  <div class="vb-tpl__slot vb-tpl__slot--bg-grey"><TextContentSection /></div>
+  <div class="vb-tpl__slot"><FaqSection /></div>
+  <div class="vb-tpl__slot"><CtaLarge /></div>
+  <div class="vb-tpl__slot"><Newsletter /></div>
+  <div class="vb-tpl__slot"><Footer /></div>
+</div>

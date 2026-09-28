@@ -1,0 +1,185 @@
+---
+/**
+ * MOLECULES — Fields (Atoms/TextInput). Reuses atom icons + tokens only.
+ * Interactive: info icon → tooltip, custom dropdown (click + hover), file upload.
+ * Light + dark columns aligned row-by-row; alert icons per state.
+ */
+import info from '../assets/icons/info-circle-2.svg?raw';
+import chevron from '../assets/icons/down-arrow.svg?raw';
+import upload from '../assets/icons/upload-document.svg?raw';
+import alert from '../assets/icons/close-circle.svg?raw';
+
+const opts = ['One line goes here', 'One line goes here', 'One line goes here', 'One line goes here'];
+---
+<div class="grid gap-8 lg:grid-cols-2">
+
+  <!-- Light column -->
+  <div class="flex flex-col gap-6 rounded-box p-8">
+
+    <label class="vb-field">
+      <span class="vb-field__label">Label name
+        <span class="vb-field__info" tabindex="0" aria-label="More info">
+          <span set:html={info}></span>
+          <span class="vb-tooltip vb-tooltip--dark vb-tooltip--top vb-field__tip">A short hint explaining what to type in this field.</span>
+        </span>
+      </span>
+      <input class="vb-input" type="text" placeholder="Placeholder" />
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is an alert message</span>
+    </label>
+
+    <label class="vb-field vb-field--focus">
+      <span class="vb-field__label">Label name</span>
+      <input class="vb-input" type="text" placeholder="Placeholder" />
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is an alert message</span>
+    </label>
+
+    <div class="vb-field">
+      <span class="vb-field__label">Label name</span>
+      <details class="vb-select" data-select>
+        <summary><span class="vb-select__value">Placeholder</span><span class="vb-select__chev" set:html={chevron}></span></summary>
+        <div class="vb-select__menu">
+          {opts.map((o) => (<div class="vb-select__opt" role="option" aria-selected="false">{o}</div>))}
+        </div>
+      </details>
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is an alert message</span>
+    </div>
+
+    <label class="vb-field vb-field--valid">
+      <span class="vb-field__label">Label name</span>
+      <input class="vb-input" type="text" value="Correct value" />
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is a success message</span>
+    </label>
+
+    <label class="vb-field vb-field--invalid">
+      <span class="vb-field__label">Label name</span>
+      <input class="vb-input" type="text" value="Wrong value" />
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is an error message</span>
+    </label>
+
+    <label class="vb-field vb-field--disabled">
+      <span class="vb-field__label">Label name</span>
+      <input class="vb-input" type="text" placeholder="Placeholder" disabled />
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is an alert message</span>
+    </label>
+
+    <label class="vb-field">
+      <span class="vb-field__label">Label name</span>
+      <textarea class="vb-input" placeholder="Placeholder"></textarea>
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is an alert message</span>
+    </label>
+
+    <div class="vb-field">
+      <span class="vb-field__label">Label name</span>
+      <label class="vb-upload" data-upload>
+        <input type="file" />
+        <span class="vb-upload__icon" set:html={upload}></span>
+        <span class="vb-upload__cta">Browse to upload a file</span>
+        <span class="vb-upload__name" hidden></span>
+      </label>
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is an alert message</span>
+    </div>
+
+  </div>
+
+  <!-- Dark column -->
+  <div class="on-dark flex flex-col gap-6 rounded-box p-8" style="background: var(--vb-color-scheme-1-bg-inverse);">
+
+    <label class="vb-field">
+      <span class="vb-field__label">Label name
+        <span class="vb-field__info" tabindex="0" aria-label="More info">
+          <span set:html={info}></span>
+          <span class="vb-tooltip vb-tooltip--light vb-tooltip--top vb-field__tip">A short hint explaining what to type in this field.</span>
+        </span>
+      </span>
+      <input class="vb-input" type="text" placeholder="Placeholder" />
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is an alert message</span>
+    </label>
+
+    <label class="vb-field vb-field--focus">
+      <span class="vb-field__label">Label name</span>
+      <input class="vb-input" type="text" placeholder="Placeholder" />
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is an alert message</span>
+    </label>
+
+    <div class="vb-field">
+      <span class="vb-field__label">Label name</span>
+      <details class="vb-select" data-select>
+        <summary><span class="vb-select__value">Placeholder</span><span class="vb-select__chev" set:html={chevron}></span></summary>
+        <div class="vb-select__menu">
+          {opts.map((o) => (<div class="vb-select__opt" role="option" aria-selected="false">{o}</div>))}
+        </div>
+      </details>
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is an alert message</span>
+    </div>
+
+    <label class="vb-field vb-field--valid">
+      <span class="vb-field__label">Label name</span>
+      <input class="vb-input" type="text" value="Correct value" />
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is a success message</span>
+    </label>
+
+    <label class="vb-field vb-field--invalid">
+      <span class="vb-field__label">Label name</span>
+      <input class="vb-input" type="text" value="Wrong value" />
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is an error message</span>
+    </label>
+
+    <label class="vb-field vb-field--disabled">
+      <span class="vb-field__label">Label name</span>
+      <input class="vb-input" type="text" placeholder="Placeholder" disabled />
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is an alert message</span>
+    </label>
+
+    <label class="vb-field">
+      <span class="vb-field__label">Label name</span>
+      <textarea class="vb-input" placeholder="Placeholder"></textarea>
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is an alert message</span>
+    </label>
+
+    <div class="vb-field">
+      <span class="vb-field__label">Label name</span>
+      <label class="vb-upload" data-upload>
+        <input type="file" />
+        <span class="vb-upload__icon" set:html={upload}></span>
+        <span class="vb-upload__cta">Browse to upload a file</span>
+        <span class="vb-upload__name" hidden></span>
+      </label>
+      <span class="vb-field__help"><span class="vb-field__help-ic" set:html={alert}></span>This is an alert message</span>
+    </div>
+
+  </div>
+
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-select]').forEach(function (sel) {
+      var value = sel.querySelector('.vb-select__value');
+      sel.querySelectorAll('.vb-select__opt').forEach(function (opt) {
+        opt.addEventListener('click', function () {
+          sel.querySelectorAll('.vb-select__opt').forEach(function (o) { o.setAttribute('aria-selected', 'false'); });
+          opt.setAttribute('aria-selected', 'true');
+          if (value) value.textContent = opt.textContent;
+          sel.open = false;
+        });
+      });
+    });
+    document.addEventListener('click', function (e) {
+      document.querySelectorAll('details[data-select][open]').forEach(function (sel) {
+        if (!sel.contains(e.target)) sel.open = false;
+      });
+    });
+    document.querySelectorAll('[data-upload] input[type=file]').forEach(function (inp) {
+      inp.addEventListener('change', function () {
+        var wrap = inp.closest('[data-upload]');
+        var name = wrap.querySelector('.vb-upload__name');
+        var cta = wrap.querySelector('.vb-upload__cta');
+        if (inp.files && inp.files.length) {
+          name.textContent = inp.files[0].name;
+          name.hidden = false;
+          if (cta) cta.hidden = true;
+        }
+      });
+    });
+  })();
+</script>

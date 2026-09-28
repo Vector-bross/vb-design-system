@@ -1,0 +1,37 @@
+---
+/**
+ * MOLECULES — Tiles / IntroBanner. Atoms only: Image placeholder, Button.
+ * Full-bleed black band (100vw), content 1120px. Desktop 2-col (image | text),
+ * mobile stacked (text first, image after). Mobile switch toggles .is-mobile.
+ */
+const placeholder = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">IntroBanner — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+
+  <div class="vb-tile-band">
+    <div class="vb-intro">
+      <div class="vb-intro__media">
+        <div class="vb-image" set:html={placeholder}></div>
+      </div>
+      <div class="vb-intro__content">
+        <p class="vb-intro__heading">Lorem ipsum dolor sit amet, consectetur adipiscing elit.uspendisse varius enim in eros elementum tristiquernare, eros dolor interdum nulla, ut commodo diam libero vitae eratem lorem ipsum.</p>
+        <a href="#" class="vb-btn vb-btn--primary vb-btn--small">Button primary</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var intro = tile.querySelector('.vb-intro');
+      if (!t || !intro) return;
+      t.addEventListener('change', function () { intro.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

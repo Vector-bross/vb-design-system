@@ -1,0 +1,100 @@
+---
+/** Styleguide — foundations: all atoms + molecule controls up to "Forms controls". */
+import PortalShell from '../layouts/PortalShell.astro';
+import Typography from '../components/atoms/Typography.astro';
+import ColorPalette from '../components/atoms/ColorPalette.astro';
+import ButtonsShowcase from '../components/ButtonsShowcase.astro';
+import LogoIcons from '../components/LogoIcons.astro';
+import EffectsFoundations from '../components/EffectsFoundations.astro';
+import ControlsShowcase from '../components/ControlsShowcase.astro';
+import FieldsShowcase from '../components/FieldsShowcase.astro';
+import FormsShowcase from '../components/FormsShowcase.astro';
+---
+<PortalShell title="Styleguide — Kickstart Theme" active="styleguide">
+  <div class="vb-lib__head">
+    <h1 class="vb-lib__title">Styleguide</h1>
+  </div>
+
+  <section class="vb-sgdl">
+    <div class="vb-sgdl__row">
+      <a class="vb-cres" href="downloads/tokens.css" download>
+        <span class="vb-cres__icn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 12 5 5 5-5"/><path d="M5 21h14"/></svg></span>
+        <span class="vb-cres__text"><span class="vb-cres__t">tokens.css</span><span class="vb-cres__s">Design tokens — source of truth</span></span>
+        <span class="vb-cres__chev">↓</span>
+      </a>
+      <a class="vb-cres" href="downloads/tokens.json" download>
+        <span class="vb-cres__icn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 12 5 5 5-5"/><path d="M5 21h14"/></svg></span>
+        <span class="vb-cres__text"><span class="vb-cres__t">tokens.json</span><span class="vb-cres__s">Tokens for Tailwind / Style Dictionary</span></span>
+        <span class="vb-cres__chev">↓</span>
+      </a>
+      <a class="vb-cres" href="downloads/design.md" download>
+        <span class="vb-cres__icn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12"/><path d="m7 12 5 5 5-5"/><path d="M5 21h14"/></svg></span>
+        <span class="vb-cres__text"><span class="vb-cres__t">design.md</span><span class="vb-cres__s">Foundations &amp; usage guide</span></span>
+        <span class="vb-cres__chev">↓</span>
+      </a>
+      <a class="vb-cres" href="downloads/assets.zip" download>
+        <span class="vb-cres__icn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v6"/><path d="M9 6h6"/></svg></span>
+        <span class="vb-cres__text"><span class="vb-cres__t">assets.zip</span><span class="vb-cres__s">All icons, social &amp; logos (SVG)</span></span>
+        <span class="vb-cres__chev">↓</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="flex flex-col gap-12">
+    <section id="typography" class="scroll-mt-28">
+      <div class="flex flex-col gap-6 rounded border border-base-300 bg-base-100 p-8">
+        <h2 class="text-3xl font-semibold tracking-tight">Typography</h2>
+        <Typography />
+      </div>
+    </section>
+
+    <section id="colors" class="scroll-mt-28">
+      <div class="flex flex-col gap-6 rounded border border-base-300 bg-base-100 p-8">
+        <h2 class="text-3xl font-semibold tracking-tight">Colors</h2>
+        <ColorPalette />
+      </div>
+    </section>
+
+    <section id="buttons" class="scroll-mt-28">
+      <div class="flex flex-col gap-6 rounded border border-base-300 bg-base-100 p-8">
+        <h2 class="text-3xl font-semibold tracking-tight">Buttons</h2>
+        <ButtonsShowcase />
+      </div>
+    </section>
+
+    <section id="logo-icons" class="scroll-mt-28">
+      <div class="flex flex-col gap-6 rounded border border-base-300 bg-base-100 p-8">
+        <h2 class="text-3xl font-semibold tracking-tight">Logo &amp; Icons</h2>
+        <LogoIcons />
+      </div>
+    </section>
+
+    <section id="radius" class="scroll-mt-28">
+      <div class="flex flex-col gap-6 rounded border border-base-300 bg-base-100 p-8">
+        <h2 class="text-3xl font-semibold tracking-tight">Radius, Shadows &amp; AR, Sep, Tooltip</h2>
+        <EffectsFoundations />
+      </div>
+    </section>
+
+    <section id="controls" class="scroll-mt-28">
+      <div class="flex flex-col gap-6 rounded border border-base-300 bg-base-100 p-8">
+        <h2 class="text-3xl font-semibold tracking-tight">Controls</h2>
+        <ControlsShowcase />
+      </div>
+    </section>
+
+    <section id="fields" class="scroll-mt-28">
+      <div class="flex flex-col gap-6 rounded border border-base-300 bg-base-100 p-8">
+        <h2 class="text-3xl font-semibold tracking-tight">Fields</h2>
+        <FieldsShowcase />
+      </div>
+    </section>
+
+    <section id="forms" class="scroll-mt-28">
+      <div class="flex flex-col gap-6 rounded border border-base-300 bg-base-100 p-8">
+        <h2 class="text-3xl font-semibold tracking-tight">Forms controls</h2>
+        <FormsShowcase />
+      </div>
+    </section>
+  </div>
+</PortalShell>

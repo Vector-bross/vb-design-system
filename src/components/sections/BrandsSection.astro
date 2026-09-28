@@ -1,0 +1,43 @@
+---
+/**
+ * ORGANISMS · Page section — BrandsSection ("Partners"). Grid of logo cells
+ * (no borders); each turns blue on hover showing the partner name + url.
+ * White band. Reuses the placeholder logo atom + tokens.
+ */
+import logo from '../../assets/brand/logo-vb.svg?raw';
+const cells = [1, 2, 3, 4, 5, 6, 7, 8];
+---
+<div class="flex flex-col gap-4" data-tile>
+  <div class="flex items-center justify-between rounded-box border border-base-300 bg-base-100 p-4">
+    <span class="text-sm font-medium uppercase tracking-wide text-base-content/60">Brands section — desktop / mobile</span>
+    <label class="vb-control"><input type="checkbox" data-mobile-toggle /><span class="vb-toggle__track"><span class="vb-toggle__thumb"></span></span>Mobile</label>
+  </div>
+  <div class="vb-sec-band vb-sec-band--white">
+    <div class="vb-sec">
+      <p class="vb-sec__title">Partners</p>
+      <div class="vb-brands" data-sec>
+        {cells.map(() => (
+          <a href="#" class="vb-brand-cell">
+            <span class="vb-brand-cell__logo" set:html={logo}></span>
+            <span class="vb-brand-cell__hover">
+              <span class="vb-brand-cell__name">Partner name</span>
+              <span class="vb-brand-cell__url">ww.urlpartner.com</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('[data-tile]').forEach(function (tile) {
+      var t = tile.querySelector('[data-mobile-toggle]');
+      var sec = tile.querySelector('[data-sec]');
+      if (!t || !sec || t.dataset.bound) return;
+      t.dataset.bound = '1';
+      t.addEventListener('change', function () { sec.classList.toggle('is-mobile', t.checked); });
+    });
+  })();
+</script>

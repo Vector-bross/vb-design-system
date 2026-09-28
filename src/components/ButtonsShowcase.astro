@@ -1,0 +1,78 @@
+---
+import Button from './atoms/Button.astro';
+
+const variants = ['primary', 'secondary', 'tertiary'] as const;
+type IconPos = 'none' | 'left' | 'right' | 'only';
+const rows: { label: string; icon: IconPos; disabled?: boolean; focus?: boolean }[] = [
+  { label: 'Text', icon: 'none' },
+  { label: 'Icon left', icon: 'left' },
+  { label: 'Icon right', icon: 'right' },
+  { label: 'Icon only', icon: 'only' },
+  { label: 'Focus', icon: 'none', focus: true },
+  { label: 'Disabled', icon: 'none', disabled: true },
+];
+const panels = [
+  { dark: false, title: 'Light mode' },
+  { dark: true, title: 'Dark mode' },
+];
+---
+<div class="flex flex-col gap-6">
+  <p class="text-sm text-base-content/60">
+    Hover et focus sont interactifs — survole ou tabule sur un bouton. Styles : Primary · Secondary · Tertiary.
+  </p>
+
+  <div class="flex flex-col gap-8">
+    {panels.map((panel) => (
+      <div
+        class={panel.dark
+          ? 'on-dark flex flex-col gap-8 rounded-box p-8'
+          : 'flex flex-col gap-8 rounded-box border border-base-300 bg-base-100 p-8'}
+        style={panel.dark ? 'background: var(--vb-color-scheme-1-bg-inverse);' : ''}
+      >
+        <div
+          class="font-mono text-[11px] uppercase tracking-wide"
+          style={panel.dark ? 'color: rgba(255,255,255,0.5);' : 'color: var(--vb-color-neutral);'}
+        >
+          {panel.title}
+        </div>
+
+        <!-- Default size matrix -->
+        <div class="grid grid-cols-[7rem_repeat(3,1fr)] items-center gap-x-6 gap-y-7">
+          <span></span>
+          {variants.map((v) => (
+            <span
+              class="text-xs font-medium capitalize"
+              style={panel.dark ? 'color: rgba(255,255,255,0.6);' : 'color: var(--vb-color-neutral);'}
+            >{v}</span>
+          ))}
+          {rows.map((row) => (
+            <Fragment>
+              <span
+                class="text-xs"
+                style={panel.dark ? 'color: rgba(255,255,255,0.45);' : 'color: var(--vb-color-neutral);'}
+              >{row.label}</span>
+              {variants.map((v) => (
+                <span>
+                  <Button variant={v} icon={row.icon} disabled={row.disabled} class={row.focus ? 'vb-btn--focus' : undefined} label="Button" />
+                </span>
+              ))}
+            </Fragment>
+          ))}
+        </div>
+
+        <!-- Small size -->
+        <div class="flex flex-col gap-3 border-t pt-5" style={panel.dark ? 'border-color: rgba(255,255,255,0.12);' : 'border-color: var(--vb-color-neutral-lighter);'}>
+          <span
+            class="font-mono text-[11px] uppercase tracking-wide"
+            style={panel.dark ? 'color: rgba(255,255,255,0.5);' : 'color: var(--vb-color-neutral);'}
+          >Small</span>
+          <div class="flex flex-wrap items-center gap-4">
+            {variants.map((v) => (
+              <Button variant={v} small icon="right" label="Button" />
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

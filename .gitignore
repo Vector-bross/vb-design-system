@@ -8,3 +8,4 @@ node_modules/
 # build caches
 .vercel
 *.log
+site-local/

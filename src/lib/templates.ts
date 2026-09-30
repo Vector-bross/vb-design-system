@@ -89,7 +89,7 @@ export const templates: TemplateEntry[] = [
     components: [
       { label: 'Navbar', reg: 'navbar', variant: 'default' },
       { label: 'Breadcrumb', reg: 'breadcrumb' },
-      { label: 'Header', reg: 'header', variant: 'Title page · image right' },
+      { label: 'Headers-content', reg: 'header', variant: 'Title page · image right' },
       { label: 'Text content', reg: 'text-content' },
       { label: 'Why us? section', reg: 'usp-section' },
       { label: 'Quote', reg: 'quote' },
@@ -130,7 +130,7 @@ export const templates: TemplateEntry[] = [
     components: [
       { label: 'Navbar', reg: 'navbar', variant: 'default' },
       { label: 'Breadcrumb', reg: 'breadcrumb' },
-      { label: 'Header', reg: 'header', variant: 'Title page · image right' },
+      { label: 'Headers-content', reg: 'header', variant: 'Title page · image right' },
       { label: 'Text content', reg: 'text-content' },
       { label: 'Quote', reg: 'quote' },
       { label: 'FAQ section', reg: 'faq-section' },
@@ -153,7 +153,7 @@ export const templates: TemplateEntry[] = [
     components: [
       { label: 'Navbar', reg: 'navbar', variant: 'default' },
       { label: 'Breadcrumb', reg: 'breadcrumb' },
-      { label: 'Header', reg: 'header', variant: 'Title page · image right' },
+      { label: 'Headers-content', reg: 'header', variant: 'Title page · image right' },
       { label: 'Jobs section', reg: 'jobs-section' },
       { label: 'CTA — small', reg: 'cta-small' },
       { label: 'Text content', reg: 'text-content' },
@@ -175,7 +175,7 @@ export const templates: TemplateEntry[] = [
     components: [
       { label: 'Navbar', reg: 'navbar', variant: 'default' },
       { label: 'Breadcrumb', reg: 'breadcrumb' },
-      { label: 'Header', reg: 'header', variant: 'Job' },
+      { label: 'Headers-content', reg: 'header', variant: 'Job' },
       { label: 'CKEditor styles', reg: 'ckeditor' },
       { label: 'Form section', reg: 'form-section', variant: 'Apply' },
       { label: 'CTA — large', reg: 'cta-large' },
@@ -213,7 +213,7 @@ export const templates: TemplateEntry[] = [
     components: [
       { label: 'Navbar', reg: 'navbar', variant: 'default' },
       { label: 'Breadcrumb', reg: 'breadcrumb' },
-      { label: 'Header', reg: 'header', variant: 'Blog' },
+      { label: 'Headers-content', reg: 'header', variant: 'Blog' },
       { label: 'CKEditor styles', reg: 'ckeditor' },
       { label: 'News section', reg: 'news-section' },
       { label: 'Why us? section', reg: 'usp-section' },
@@ -250,7 +250,7 @@ export const templates: TemplateEntry[] = [
     components: [
       { label: 'Navbar', reg: 'navbar', variant: 'default' },
       { label: 'Breadcrumb', reg: 'breadcrumb' },
-      { label: 'Header', reg: 'header', variant: 'Person profile' },
+      { label: 'Headers-content', reg: 'header', variant: 'Person profile' },
       { label: 'Text content', reg: 'text-content' },
       { label: 'Why us? section', reg: 'usp-section' },
       { label: 'CTA — large', reg: 'cta-large' },
@@ -286,7 +286,7 @@ export const templates: TemplateEntry[] = [
     components: [
       { label: 'Navbar', reg: 'navbar', variant: 'default' },
       { label: 'Breadcrumb', reg: 'breadcrumb' },
-      { label: 'Header', reg: 'header', variant: 'Location detail' },
+      { label: 'Headers-content', reg: 'header', variant: 'Location detail' },
       { label: 'Gallery', reg: 'gallery' },
       { label: 'FAQ section', reg: 'faq-section' },
       { label: 'News section', reg: 'news-section' },
@@ -306,7 +306,7 @@ export const templates: TemplateEntry[] = [
     components: [
       { label: 'Navbar', reg: 'navbar', variant: 'default' },
       { label: 'Breadcrumb', reg: 'breadcrumb' },
-      { label: 'Header', reg: 'header', variant: 'Contact us' },
+      { label: 'Headers-content', reg: 'header', variant: 'Contact us' },
       { label: 'Form section', reg: 'form-section', variant: 'Contact' },
       { label: 'Newsletter', reg: 'newsletter' },
       { label: 'Footer', reg: 'footer' },

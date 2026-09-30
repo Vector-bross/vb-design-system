@@ -83,6 +83,7 @@ const sourcesJson = JSON.stringify(sources).replace(/</g, '\\u003c');
               <div class="vb-libcard__body">
                 <span class="vb-libcard__cat">{catLabel(cat.id)}</span>
                 <a class="vb-libcard__name" href={`c/${e.id}.html`}>{e.name}</a>
+                <span class="vb-libcard__id">#{e.id}</span>
               </div>
               <div class="vb-libcard__actions">
                 <a class="vb-libcard__copy" href={`c/${e.id}.html`}>View component</a>

@@ -1116,6 +1116,8 @@ textarea.vb-input { height: auto; min-height: 200px; resize: vertical; padding: 
 .vb-libcard__body { display: flex; flex-direction: column; gap: 2px; }
 .vb-libcard__cat { font-family: var(--vb-font-family-body); font-weight: var(--vb-font-weight-medium); font-size: 11px; text-transform: uppercase; letter-spacing: var(--vb-letter-spacing-wide); color: var(--vb-color-scheme-1-text-secondary); }
 .vb-libcard__name { font-family: var(--vb-font-family-heading); font-weight: var(--vb-font-weight-semibold); font-size: var(--vb-font-size-base); color: var(--vb-color-scheme-1-emphasis-color); text-decoration: none; }
+.vb-libcard__id { font-family: var(--vb-font-family-body); font-size: 11px; color: var(--vb-color-scheme-1-secondary-color); font-variant-numeric: tabular-nums; user-select: all; }
+.vb-cap-id { margin-left: var(--vb-spacer-2); font-family: var(--vb-font-family-body); font-size: 11px; font-weight: var(--vb-font-weight-normal); letter-spacing: 0; text-transform: none; color: var(--vb-color-scheme-1-text-secondary); background: var(--vb-color-neutral-lightest); border-radius: var(--vb-radius-tiny); padding: 1px 6px; user-select: all; vertical-align: middle; }
 .vb-libcard__name:hover { color: var(--vb-brand-primary-500); }
 /* Action row (Relume-style): Copy + preview + bookmark. */
 .vb-libcard__actions { display: flex; align-items: center; gap: var(--vb-spacer-2); margin-top: auto; }
